@@ -1,0 +1,699 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 2400" width="1800" height="2400">
+  <defs>
+    <!-- Arrowhead markers -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#d32f2f"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1976d2"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#388e3c"/>
+    </marker>
+    
+    <!-- IR Beam gradient -->
+    <linearGradient id="irBeam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="irBeamBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4dabf7;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#4dabf7;stop-opacity:0"/>
+    </linearGradient>
+    
+    <!-- Background pattern -->
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1800" height="2400" fill="#fafafa"/>
+  <rect width="1800" height="2400" fill="url(#grid)"/>
+  
+  <!-- ==================== TITLE ==================== -->
+  <rect x="10" y="10" width="1780" height="70" rx="5" fill="#1a237e" opacity="0.95"/>
+  <text x="900" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="white">로봇 청소기 IR 네비게이션 시스템 분석 및 회로도</text>
+  <text x="1750" y="55" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="#90caf9">Rev 1.0 | 2025.01</text>
+  
+  <!-- ==================== SECTION 1: SYSTEM OVERVIEW ==================== -->
+  <rect x="20" y="95" width="1760" height="380" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  <text x="900" y="125" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#1565c0">1. IR 네비게이션 시스템 개요</text>
+  
+  <!-- Docking Station Visual -->
+  <rect x="100" y="150" width="400" height="300" rx="10" fill="white" stroke="#666" stroke-width="2"/>
+  <text x="300" y="180" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">충전 스테이션 (Docking Station)</text>
+  
+  <!-- Upper Layer -->
+  <rect x="130" y="200" width="340" height="80" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="1.5"/>
+  <text x="300" y="220" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#e65100">상단 레이어 (Upper Layer)</text>
+  
+  <!-- Blue LEDs (curved) -->
+  <ellipse cx="220" cy="255" rx="20" ry="15" fill="#2196f3" stroke="#1565c0" stroke-width="1"/>
+  <text x="220" y="258" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">BLUE</text>
+  <ellipse cx="380" cy="255" rx="20" ry="15" fill="#2196f3" stroke="#1565c0" stroke-width="1"/>
+  <text x="380" y="258" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">BLUE</text>
+  
+  <!-- Flat transparent LEDs -->
+  <rect x="150" y="245" width="25" height="20" rx="2" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+  <text x="162" y="258" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#333">IR</text>
+  <rect x="425" y="245" width="25" height="20" rx="2" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+  <text x="437" y="258" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#333">IR</text>
+  
+  <!-- Lower Layer -->
+  <rect x="130" y="295" width="340" height="130" rx="5" fill="#fce4ec" stroke="#c2185b" stroke-width="1.5"/>
+  <text x="300" y="315" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#880e4f">하단 레이어 (Lower Layer) - 도킹 비콘</text>
+  
+  <!-- IR Emitters in lower layer -->
+  <!-- Far Left ~30° -->
+  <rect x="150" y="340" width="30" height="20" rx="2" fill="#ff8a80" stroke="#d32f2f" stroke-width="1" transform="rotate(-30, 165, 350)"/>
+  <text x="165" y="370" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">L-Far</text>
+  
+  <!-- Left Front -->
+  <rect x="200" y="340" width="30" height="20" rx="2" fill="#ff8a80" stroke="#d32f2f" stroke-width="1"/>
+  <text x="215" y="370" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">L-Front</text>
+  
+  <!-- Center -->
+  <rect x="285" y="340" width="30" height="20" rx="2" fill="#ffab91" stroke="#e64a19" stroke-width="1"/>
+  <text x="300" y="370" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">Center</text>
+  
+  <!-- Right Front -->
+  <rect x="370" y="340" width="30" height="20" rx="2" fill="#ff8a80" stroke="#d32f2f" stroke-width="1"/>
+  <text x="385" y="370" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">R-Front</text>
+  
+  <!-- Far Right ~30° -->
+  <rect x="420" y="340" width="30" height="20" rx="2" fill="#ff8a80" stroke="#d32f2f" stroke-width="1" transform="rotate(30, 435, 350)"/>
+  <text x="435" y="370" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">R-Far</text>
+  
+  <!-- IR Beam visualization -->
+  <path d="M 165 350 L 50 450 L 50 300 Z" fill="url(#irBeam)" opacity="0.3"/>
+  <path d="M 215 350 L 100 450 L 150 300 Z" fill="url(#irBeam)" opacity="0.3"/>
+  <path d="M 300 350 L 250 500 L 350 500 Z" fill="url(#irBeam)" opacity="0.3"/>
+  <path d="M 385 350 L 500 450 L 450 300 Z" fill="url(#irBeam)" opacity="0.3"/>
+  <path d="M 435 350 L 550 450 L 550 300 Z" fill="url(#irBeam)" opacity="0.3"/>
+  
+  <!-- Beam Labels -->
+  <text x="300" y="405" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#d32f2f">도킹 유도 IR 빔 필드</text>
+  
+  <!-- Robot Body Visual -->
+  <rect x="600" y="150" width="500" height="300" rx="10" fill="white" stroke="#666" stroke-width="2"/>
+  <text x="850" y="180" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">로봇 본체 (Robot Body)</text>
+  
+  <!-- Robot top view circle -->
+  <circle cx="850" cy="320" r="100" fill="#e8e8e8" stroke="#333" stroke-width="2"/>
+  <text x="850" y="325" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">본체 (Top View)</text>
+  
+  <!-- Bumper ring -->
+  <circle cx="850" cy="320" r="115" fill="none" stroke="#4caf50" stroke-width="8" stroke-dasharray="10,5"/>
+  <text x="850" y="215" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2e7d32">범퍼 (20x IR TX LED)</text>
+  
+  <!-- IR TX LEDs on bumper (20개) -->
+  <g fill="#ff5722" stroke="#e64a19" stroke-width="0.5">
+    <circle cx="850" cy="200" r="4"/>
+    <circle cx="885" cy="203" r="4"/>
+    <circle cx="918" cy="212" r="4"/>
+    <circle cx="945" cy="230" r="4"/>
+    <circle cx="965" cy="255" r="4"/>
+    <circle cx="975" cy="285" r="4"/>
+    <circle cx="975" cy="315" r="4"/>
+    <circle cx="965" cy="345" r="4"/>
+    <circle cx="945" cy="375" r="4"/>
+    <circle cx="918" cy="395" r="4"/>
+    <circle cx="815" cy="203" r="4"/>
+    <circle cx="782" cy="212" r="4"/>
+    <circle cx="755" cy="230" r="4"/>
+    <circle cx="735" cy="255" r="4"/>
+    <circle cx="725" cy="285" r="4"/>
+    <circle cx="725" cy="315" r="4"/>
+    <circle cx="735" cy="345" r="4"/>
+    <circle cx="755" cy="375" r="4"/>
+    <circle cx="782" cy="395" r="4"/>
+    <circle cx="815" cy="395" r="4"/>
+  </g>
+  
+  <!-- IR Receivers on robot -->
+  <!-- Front center (2개 붙어있음) -->
+  <rect x="843" y="193" width="14" height="10" rx="2" fill="#3f51b5" stroke="#1a237e" stroke-width="1"/>
+  <text x="850" y="185" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#1a237e">RX×2</text>
+  
+  <!-- Front ±120° positions -->
+  <rect x="918" y="255" width="14" height="10" rx="2" fill="#3f51b5" stroke="#1a237e" stroke-width="1" transform="rotate(60, 925, 260)"/>
+  <text x="940" y="245" font-family="Arial, sans-serif" font-size="8" fill="#1a237e">RX</text>
+  
+  <rect x="768" y="255" width="14" height="10" rx="2" fill="#3f51b5" stroke="#1a237e" stroke-width="1" transform="rotate(-60, 775, 260)"/>
+  <text x="750" y="245" font-family="Arial, sans-serif" font-size="8" fill="#1a237e">RX</text>
+  
+  <!-- Rear ±120° positions -->
+  <rect x="768" y="375" width="14" height="10" rx="2" fill="#9c27b0" stroke="#6a1b9a" stroke-width="1" transform="rotate(-120, 775, 380)"/>
+  <text x="745" y="400" font-family="Arial, sans-serif" font-size="8" fill="#6a1b9a">RX</text>
+  
+  <rect x="918" y="375" width="14" height="10" rx="2" fill="#9c27b0" stroke="#6a1b9a" stroke-width="1" transform="rotate(120, 925, 380)"/>
+  <text x="950" y="400" font-family="Arial, sans-serif" font-size="8" fill="#6a1b9a">RX</text>
+  
+  <!-- Direction indicator -->
+  <polygon points="850,220 840,240 860,240" fill="#333"/>
+  <text x="850" y="250" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">전면</text>
+  
+  <!-- Function Descriptions -->
+  <rect x="1130" y="150" width="620" height="300" rx="10" fill="white" stroke="#666" stroke-width="2"/>
+  <text x="1440" y="180" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">기능별 역할 분석</text>
+  
+  <text x="1150" y="210" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#d32f2f">■ 충전 스테이션 IR LED (송신)</text>
+  <text x="1160" y="230" font-family="Arial, sans-serif" font-size="11" fill="#333">• 상단 Blue LED: 상태 표시 (충전중/대기)</text>
+  <text x="1160" y="248" font-family="Arial, sans-serif" font-size="11" fill="#333">• 상단 평면 IR: 근접 회피 신호 (Omni-directional)</text>
+  <text x="1160" y="266" font-family="Arial, sans-serif" font-size="11" fill="#333">• 하단 5개 IR: 도킹 유도 빔 (방향성 코딩된 신호)</text>
+  <text x="1170" y="284" font-family="Arial, sans-serif" font-size="10" fill="#666">- Far L/R: Force Field (청소 중 회피용)</text>
+  <text x="1170" y="300" font-family="Arial, sans-serif" font-size="10" fill="#666">- Front L/R: 좌우 정렬 빔 (Overlapping Field)</text>
+  <text x="1170" y="316" font-family="Arial, sans-serif" font-size="10" fill="#666">- Center: 정밀 도킹 빔 (Home Beam)</text>
+  
+  <text x="1150" y="345" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1976d2">■ 로봇 본체 IR 센서</text>
+  <text x="1160" y="365" font-family="Arial, sans-serif" font-size="11" fill="#333">• 범퍼 20x IR TX: 장애물 감지용 (반사 방식)</text>
+  <text x="1160" y="383" font-family="Arial, sans-serif" font-size="11" fill="#333">• 전면 IR RX ×2: 도킹 빔 수신 (정밀 정렬)</text>
+  <text x="1160" y="401" font-family="Arial, sans-serif" font-size="11" fill="#333">• 전면 ±120° IR RX: 광역 도킹 신호 탐지</text>
+  <text x="1160" y="419" font-family="Arial, sans-serif" font-size="11" fill="#333">• 후면 ±120° IR RX: 역방향 도킹/Virtual Wall 감지</text>
+  
+  <!-- ==================== SECTION 2: DOCKING ALGORITHM ==================== -->
+  <rect x="20" y="490" width="870" height="350" rx="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
+  <text x="455" y="520" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2e7d32">2. 도킹 알고리즘 (Homing Sequence)</text>
+  
+  <!-- Phase 1 -->
+  <rect x="40" y="545" width="200" height="120" rx="5" fill="white" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="140" y="565" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2e7d32">Phase 1: 탐색</text>
+  <text x="50" y="585" font-family="Arial, sans-serif" font-size="10" fill="#333">• 배터리 Low → 도킹 모드 진입</text>
+  <text x="50" y="600" font-family="Arial, sans-serif" font-size="10" fill="#333">• 벽 따라가기로 Far L/R 빔 탐색</text>
+  <text x="50" y="615" font-family="Arial, sans-serif" font-size="10" fill="#333">• Omni-RX로 스테이션 방향 감지</text>
+  <text x="50" y="630" font-family="Arial, sans-serif" font-size="10" fill="#333">• Force Field 진입 시 회전</text>
+  <circle cx="140" cy="655" r="15" fill="#66bb6a"/>
+  <text x="140" y="660" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">1</text>
+  
+  <line x1="240" y1="605" x2="270" y2="605" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead-green)"/>
+  
+  <!-- Phase 2 -->
+  <rect x="275" y="545" width="200" height="120" rx="5" fill="white" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="375" y="565" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2e7d32">Phase 2: 접근</text>
+  <text x="285" y="585" font-family="Arial, sans-serif" font-size="10" fill="#333">• Front L/R 빔 감지 시작</text>
+  <text x="285" y="600" font-family="Arial, sans-serif" font-size="10" fill="#333">• Overlapping Field에서 중심 탐색</text>
+  <text x="285" y="615" font-family="Arial, sans-serif" font-size="10" fill="#333">• L빔만 감지 → 우회전</text>
+  <text x="285" y="630" font-family="Arial, sans-serif" font-size="10" fill="#333">• R빔만 감지 → 좌회전</text>
+  <circle cx="375" cy="655" r="15" fill="#66bb6a"/>
+  <text x="375" y="660" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">2</text>
+  
+  <line x1="475" y1="605" x2="505" y2="605" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead-green)"/>
+  
+  <!-- Phase 3 -->
+  <rect x="510" y="545" width="200" height="120" rx="5" fill="white" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="610" y="565" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2e7d32">Phase 3: 정렬</text>
+  <text x="520" y="585" font-family="Arial, sans-serif" font-size="10" fill="#333">• Center 빔 탐지</text>
+  <text x="520" y="600" font-family="Arial, sans-serif" font-size="10" fill="#333">• 전면 RX×2로 정밀 정렬</text>
+  <text x="520" y="615" font-family="Arial, sans-serif" font-size="10" fill="#333">• 신호 강도 균등화</text>
+  <text x="520" y="630" font-family="Arial, sans-serif" font-size="10" fill="#333">• 저속 직진 시작</text>
+  <circle cx="610" cy="655" r="15" fill="#66bb6a"/>
+  <text x="610" y="660" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">3</text>
+  
+  <line x1="710" y1="605" x2="740" y2="605" stroke="#388e3c" stroke-width="2" marker-end="url(#arrowhead-green)"/>
+  
+  <!-- Phase 4 -->
+  <rect x="745" y="545" width="130" height="120" rx="5" fill="white" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="810" y="565" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2e7d32">Phase 4: 도킹</text>
+  <text x="755" y="585" font-family="Arial, sans-serif" font-size="10" fill="#333">• 충전 단자 접촉</text>
+  <text x="755" y="600" font-family="Arial, sans-serif" font-size="10" fill="#333">• 전압 감지</text>
+  <text x="755" y="615" font-family="Arial, sans-serif" font-size="10" fill="#333">• 모터 정지</text>
+  <text x="755" y="630" font-family="Arial, sans-serif" font-size="10" fill="#333">• 충전 시작</text>
+  <circle cx="810" cy="655" r="15" fill="#66bb6a"/>
+  <text x="810" y="660" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">4</text>
+  
+  <!-- Beam field diagram -->
+  <rect x="40" y="680" width="840" height="145" rx="5" fill="#f1f8e9" stroke="#aed581" stroke-width="1"/>
+  <text x="460" y="700" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#558b2f">도킹 빔 필드 구성 (Top View)</text>
+  
+  <!-- Station representation -->
+  <rect x="430" y="720" width="60" height="20" fill="#333" rx="3"/>
+  <text x="460" y="733" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Station</text>
+  
+  <!-- Far Left beam -->
+  <path d="M 430 730 L 250 810 L 350 810 Z" fill="#ffcdd2" stroke="#d32f2f" stroke-width="1" opacity="0.6"/>
+  <text x="310" y="790" font-family="Arial, sans-serif" font-size="9" fill="#c62828">Far-L</text>
+  
+  <!-- Left Front beam -->
+  <path d="M 445 740 L 340 810 L 420 810 Z" fill="#bbdefb" stroke="#1976d2" stroke-width="1" opacity="0.6"/>
+  <text x="380" y="795" font-family="Arial, sans-serif" font-size="9" fill="#1565c0">Front-L</text>
+  
+  <!-- Center beam -->
+  <path d="M 460 740 L 430 810 L 490 810 Z" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" opacity="0.6"/>
+  <text x="460" y="795" font-family="Arial, sans-serif" font-size="9" fill="#2e7d32">Center</text>
+  
+  <!-- Right Front beam -->
+  <path d="M 475 740 L 500 810 L 580 810 Z" fill="#bbdefb" stroke="#1976d2" stroke-width="1" opacity="0.6"/>
+  <text x="540" y="795" font-family="Arial, sans-serif" font-size="9" fill="#1565c0">Front-R</text>
+  
+  <!-- Far Right beam -->
+  <path d="M 490 730 L 570 810 L 670 810 Z" fill="#ffcdd2" stroke="#d32f2f" stroke-width="1" opacity="0.6"/>
+  <text x="610" y="790" font-family="Arial, sans-serif" font-size="9" fill="#c62828">Far-R</text>
+  
+  <!-- Overlapping region -->
+  <ellipse cx="460" cy="780" rx="40" ry="20" fill="#fff59d" stroke="#f9a825" stroke-width="1" opacity="0.7"/>
+  <text x="460" y="815" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#f57f17">Overlap Zone</text>
+  
+  <!-- ==================== SECTION 3: OBSTACLE AVOIDANCE ==================== -->
+  <rect x="910" y="490" width="870" height="350" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="1345" y="520" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#e65100">3. 장애물 회피 시스템 (Obstacle Avoidance)</text>
+  
+  <!-- IR Reflective sensing diagram -->
+  <rect x="930" y="545" width="410" height="280" rx="5" fill="white" stroke="#ffb74d" stroke-width="1.5"/>
+  <text x="1135" y="565" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#e65100">반사형 IR 장애물 감지 원리</text>
+  
+  <!-- Robot bumper cross section -->
+  <rect x="950" y="600" width="150" height="60" rx="5" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+  <text x="1025" y="635" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#333">범퍼 단면</text>
+  
+  <!-- IR TX LED -->
+  <rect x="970" y="610" width="20" height="30" rx="2" fill="#ff5722" stroke="#e64a19" stroke-width="1"/>
+  <text x="980" y="655" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">TX</text>
+  
+  <!-- IR RX -->
+  <rect x="1060" y="610" width="20" height="30" rx="2" fill="#3f51b5" stroke="#1a237e" stroke-width="1"/>
+  <text x="1070" y="655" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">RX</text>
+  
+  <!-- IR beam out -->
+  <line x1="990" y1="620" x2="1150" y2="580" stroke="#ff5722" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="990" y1="630" x2="1200" y2="630" stroke="#ff5722" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Obstacle -->
+  <rect x="1200" y="560" width="30" height="100" rx="3" fill="#795548" stroke="#4e342e" stroke-width="1.5"/>
+  <text x="1215" y="620" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white" transform="rotate(90, 1215, 620)">장애물</text>
+  
+  <!-- Reflected beam -->
+  <line x1="1200" y1="580" x2="1080" y2="620" stroke="#ff5722" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="1200" y1="630" x2="1080" y2="630" stroke="#ff5722" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- 38kHz modulation note -->
+  <text x="1135" y="685" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#333">38kHz 변조 신호 → 반사 → 수신 → 거리 계산</text>
+  
+  <!-- Signal waveform -->
+  <rect x="960" y="700" width="350" height="60" rx="3" fill="#fff8e1" stroke="#ffc107" stroke-width="1"/>
+  <text x="970" y="715" font-family="Arial, sans-serif" font-size="9" fill="#333">변조 신호:</text>
+  <path d="M 1040 720 L 1045 720 L 1045 740 L 1050 740 L 1050 720 L 1055 720 L 1055 740 L 1060 740 L 1060 720 L 1065 720 L 1065 740 L 1070 740 L 1070 720 L 1075 720" fill="none" stroke="#ff5722" stroke-width="1.5"/>
+  <text x="1135" y="735" font-family="Arial, sans-serif" font-size="9" fill="#333">38kHz Carrier (T=26.3µs)</text>
+  <text x="970" y="752" font-family="Arial, sans-serif" font-size="9" fill="#333">수신 신호: 장애물 거리에 따른 반사 강도 변화</text>
+  
+  <!-- Detection range info -->
+  <rect x="960" y="765" width="350" height="45" rx="3" fill="#ffecb3" stroke="#ffa000" stroke-width="1"/>
+  <text x="1135" y="783" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#e65100">감지 범위</text>
+  <text x="970" y="800" font-family="Arial, sans-serif" font-size="9" fill="#333">• 유효 거리: 2cm ~ 40cm (가변 저항으로 조절)</text>
+  
+  <!-- Sensor specifications -->
+  <rect x="1360" y="545" width="400" height="280" rx="5" fill="white" stroke="#ffb74d" stroke-width="1.5"/>
+  <text x="1560" y="565" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#e65100">IR 센서 사양</text>
+  
+  <text x="1380" y="590" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">송신부 (TX LED)</text>
+  <text x="1390" y="610" font-family="Arial, sans-serif" font-size="10" fill="#333">• 파장: 940nm (근적외선)</text>
+  <text x="1390" y="625" font-family="Arial, sans-serif" font-size="10" fill="#333">• 구동: 38kHz PWM 변조</text>
+  <text x="1390" y="640" font-family="Arial, sans-serif" font-size="10" fill="#333">• 전류: 20~100mA (거리에 따라)</text>
+  <text x="1390" y="655" font-family="Arial, sans-serif" font-size="10" fill="#333">• 빔 각도: 20°~30° (SMD 타입)</text>
+  
+  <text x="1380" y="680" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">수신부 (IR Receiver)</text>
+  <text x="1390" y="700" font-family="Arial, sans-serif" font-size="10" fill="#333">• IC: TSOP38238 / VS1838B 호환</text>
+  <text x="1390" y="715" font-family="Arial, sans-serif" font-size="10" fill="#333">• 수신 파장: 940nm ±50nm</text>
+  <text x="1390" y="730" font-family="Arial, sans-serif" font-size="10" fill="#333">• 중심 주파수: 38kHz</text>
+  <text x="1390" y="745" font-family="Arial, sans-serif" font-size="10" fill="#333">• AGC (Auto Gain Control) 내장</text>
+  <text x="1390" y="760" font-family="Arial, sans-serif" font-size="10" fill="#333">• 출력: Active Low (감지 시 LOW)</text>
+  
+  <text x="1380" y="790" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#d32f2f">⚠ 설계 주의사항</text>
+  <text x="1390" y="810" font-family="Arial, sans-serif" font-size="10" fill="#333">• TX-RX 간 차폐 필수 (직접 결합 방지)</text>
+  
+  <!-- ==================== SECTION 4: CHARGING STATION SCHEMATIC ==================== -->
+  <rect x="20" y="855" width="1760" height="500" rx="10" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+  <text x="900" y="885" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#6a1b9a">4. 충전 스테이션 IR 회로도</text>
+  
+  <!-- MCU Section -->
+  <rect x="40" y="910" width="180" height="200" rx="5" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="130" y="940" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">MCU</text>
+  <text x="130" y="958" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">STM32C011F4</text>
+  
+  <!-- MCU pins -->
+  <text x="50" y="985" font-family="monospace" font-size="9" fill="#333">PA0 → TIM2_CH1</text>
+  <text x="50" y="1000" font-family="monospace" font-size="9" fill="#333">PA1 → TIM2_CH2</text>
+  <text x="50" y="1015" font-family="monospace" font-size="9" fill="#333">PA2 → TIM2_CH3</text>
+  <text x="50" y="1030" font-family="monospace" font-size="9" fill="#333">PA3 → TIM2_CH4</text>
+  <text x="50" y="1045" font-family="monospace" font-size="9" fill="#333">PA4 → GPIO (EN)</text>
+  <text x="50" y="1060" font-family="monospace" font-size="9" fill="#333">PA5 → ADC (옵션)</text>
+  <text x="50" y="1075" font-family="monospace" font-size="9" fill="#333">PA6 → TIM3_CH1</text>
+  <text x="50" y="1090" font-family="monospace" font-size="9" fill="#333">PA7 → TIM3_CH2</text>
+  
+  <!-- IR Driver Section -->
+  <rect x="260" y="910" width="400" height="200" rx="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="460" y="935" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">IR LED 드라이버 회로 (HY3D MOSFET)</text>
+  
+  <!-- MOSFET driver circuit -->
+  <g transform="translate(280, 960)">
+    <!-- PWM input -->
+    <line x1="0" y1="30" x2="30" y2="30" stroke="#9c27b0" stroke-width="1.5"/>
+    <text x="5" y="25" font-family="Arial, sans-serif" font-size="8" fill="#9c27b0">PWM</text>
+    
+    <!-- Gate resistor -->
+    <rect x="30" y="25" width="30" height="10" fill="none" stroke="#333" stroke-width="1"/>
+    <text x="45" y="48" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#333">R 100Ω</text>
+    
+    <!-- MOSFET symbol -->
+    <circle cx="85" cy="30" r="20" fill="none" stroke="#333" stroke-width="1"/>
+    <line x1="60" y1="30" x2="70" y2="30" stroke="#333" stroke-width="1"/>
+    <line x1="70" y1="20" x2="70" y2="40" stroke="#333" stroke-width="1.5"/>
+    <line x1="75" y1="15" x2="75" y2="25" stroke="#333" stroke-width="1"/>
+    <line x1="75" y1="35" x2="75" y2="45" stroke="#333" stroke-width="1"/>
+    <line x1="75" y1="20" x2="95" y2="20" stroke="#333" stroke-width="1"/>
+    <line x1="75" y1="40" x2="95" y2="40" stroke="#333" stroke-width="1"/>
+    <line x1="95" y1="20" x2="95" y2="0" stroke="#333" stroke-width="1"/>
+    <line x1="95" y1="40" x2="95" y2="60" stroke="#333" stroke-width="1"/>
+    <polygon points="75,40 80,37 80,43" fill="#333"/>
+    <text x="100" y="33" font-family="Arial, sans-serif" font-size="8" fill="#333">Q1</text>
+    <text x="85" y="75" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#666">HY3D</text>
+    
+    <!-- Current limiting resistor -->
+    <rect x="85" y="-25" width="20" height="10" fill="none" stroke="#333" stroke-width="1"/>
+    <text x="95" y="-28" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#333">R 47Ω</text>
+    
+    <!-- IR LED -->
+    <line x1="95" y1="-15" x2="95" y2="-45" stroke="#333" stroke-width="1"/>
+    <polygon points="85,-55 105,-55 95,-45" fill="#ff5722" stroke="#e64a19" stroke-width="1"/>
+    <line x1="85" y1="-55" x2="105" y2="-55" stroke="#333" stroke-width="1"/>
+    <line x1="95" y1="-55" x2="95" y2="-75" stroke="#d32f2f" stroke-width="1.5"/>
+    <text x="115" y="-50" font-family="Arial, sans-serif" font-size="8" fill="#333">IR LED</text>
+    <text x="115" y="-62" font-family="Arial, sans-serif" font-size="7" fill="#666">940nm</text>
+    
+    <!-- VCC connection -->
+    <text x="95" y="-82" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#d32f2f">VCC 5V</text>
+    
+    <!-- GND -->
+    <line x1="85" y1="60" x2="105" y2="60" stroke="#333" stroke-width="1.5"/>
+    <line x1="88" y1="65" x2="102" y2="65" stroke="#333" stroke-width="1"/>
+    <line x1="91" y1="70" x2="99" y2="70" stroke="#333" stroke-width="1"/>
+    <text x="95" y="82" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#333">GND</text>
+  </g>
+  
+  <!-- Additional channels notation -->
+  <text x="460" y="1085" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#666">× 5채널 (Far-L, Front-L, Center, Front-R, Far-R)</text>
+  <text x="460" y="1100" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#888">각 채널별 독립 PWM으로 코딩된 신호 송출</text>
+  
+  <!-- Signal Coding Section -->
+  <rect x="690" y="910" width="350" height="200" rx="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="865" y="935" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">IR 신호 코딩 방식</text>
+  
+  <text x="710" y="960" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">38kHz 캐리어 + 데이터 인코딩</text>
+  
+  <!-- Carrier wave -->
+  <rect x="710" y="970" width="310" height="35" rx="2" fill="#e3f2fd" stroke="#1976d2" stroke-width="1"/>
+  <text x="720" y="985" font-family="Arial, sans-serif" font-size="8" fill="#333">Carrier:</text>
+  <path d="M 780 985 L 785 985 L 785 995 L 790 995 L 790 985 L 795 985 L 795 995 L 800 995 L 800 985 L 805 985 L 805 995 L 810 995 L 810 985 L 815 985 L 815 995 L 820 995 L 820 985 L 825 985 L 825 995 L 830 995 L 830 985 L 835 985" fill="none" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="880" y="992" font-family="Arial, sans-serif" font-size="8" fill="#1565c0">38kHz (26.3µs period)</text>
+  
+  <!-- Coded signal -->
+  <rect x="710" y="1010" width="310" height="45" rx="2" fill="#fce4ec" stroke="#c2185b" stroke-width="1"/>
+  <text x="720" y="1025" font-family="Arial, sans-serif" font-size="8" fill="#333">Data:</text>
+  <rect x="780" y="1020" width="20" height="15" fill="#c2185b"/>
+  <rect x="810" y="1020" width="10" height="15" fill="#c2185b"/>
+  <rect x="830" y="1020" width="30" height="15" fill="#c2185b"/>
+  <rect x="870" y="1020" width="10" height="15" fill="#c2185b"/>
+  <text x="865" y="1048" font-family="Arial, sans-serif" font-size="8" fill="#880e4f">채널별 고유 패턴 (Burst)</text>
+  
+  <text x="710" y="1075" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#333">채널별 코드:</text>
+  <text x="720" y="1090" font-family="monospace" font-size="8" fill="#333">Far-L:   0x01  |  Front-L: 0x02  |  Center: 0x04</text>
+  <text x="720" y="1103" font-family="monospace" font-size="8" fill="#333">Front-R: 0x08  |  Far-R:   0x10  |  Force:  0x20</text>
+  
+  <!-- Blue LED Section -->
+  <rect x="1070" y="910" width="200" height="200" rx="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="1170" y="935" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">상태 표시 LED</text>
+  
+  <!-- Blue LED circuit -->
+  <g transform="translate(1100, 960)">
+    <line x1="0" y1="20" x2="30" y2="20" stroke="#333" stroke-width="1"/>
+    <text x="5" y="15" font-family="Arial, sans-serif" font-size="8" fill="#333">GPIO</text>
+    
+    <rect x="30" y="15" width="25" height="10" fill="none" stroke="#333" stroke-width="1"/>
+    <text x="42" y="38" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#333">330Ω</text>
+    
+    <polygon points="55,25 75,25 65,15" fill="#2196f3" stroke="#1565c0" stroke-width="1"/>
+    <line x1="55" y1="25" x2="75" y2="25" stroke="#333" stroke-width="1"/>
+    <line x1="65" y1="25" x2="65" y2="45" stroke="#333" stroke-width="1"/>
+    <line x1="55" y1="45" x2="75" y2="45" stroke="#333" stroke-width="1.5"/>
+    <text x="90" y="20" font-family="Arial, sans-serif" font-size="8" fill="#333">Blue LED</text>
+  </g>
+  
+  <text x="1170" y="1040" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#333">상태 표시:</text>
+  <text x="1100" y="1060" font-family="Arial, sans-serif" font-size="9" fill="#333">• 점등: 충전 중</text>
+  <text x="1100" y="1075" font-family="Arial, sans-serif" font-size="9" fill="#333">• 점멸: 대기 모드</text>
+  <text x="1100" y="1090" font-family="Arial, sans-serif" font-size="9" fill="#333">• 소등: 전원 OFF</text>
+  
+  <!-- Power Section -->
+  <rect x="1300" y="910" width="200" height="200" rx="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="1400" y="935" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">전원부</text>
+  
+  <text x="1320" y="960" font-family="Arial, sans-serif" font-size="10" fill="#333">입력: AC 220V</text>
+  <text x="1320" y="980" font-family="Arial, sans-serif" font-size="10" fill="#333">AC-DC: 24V/3A (충전)</text>
+  <text x="1320" y="1000" font-family="Arial, sans-serif" font-size="10" fill="#333">DC-DC: 5V (로직/IR)</text>
+  
+  <rect x="1320" y="1020" width="160" height="70" rx="3" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+  <text x="1400" y="1040" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#e65100">주요 부품</text>
+  <text x="1330" y="1058" font-family="Arial, sans-serif" font-size="8" fill="#333">• U1: 7805 (5V LDO)</text>
+  <text x="1330" y="1073" font-family="Arial, sans-serif" font-size="8" fill="#333">• D1: SS24 (Schottky)</text>
+  <text x="1330" y="1088" font-family="Arial, sans-serif" font-size="8" fill="#333">• C1: 100µF 35V</text>
+  
+  <!-- Connections -->
+  <line x1="220" y1="980" x2="260" y2="980" stroke="#9c27b0" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="220" y1="1000" x2="260" y2="1000" stroke="#9c27b0" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="220" y1="1020" x2="260" y2="1020" stroke="#9c27b0" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="220" y1="1040" x2="260" y2="1040" stroke="#9c27b0" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="220" y1="1075" x2="260" y2="1075" stroke="#9c27b0" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- ==================== SECTION 5: ROBOT BODY IR SCHEMATIC ==================== -->
+  <rect x="20" y="1370" width="1760" height="500" rx="10" fill="#e8eaf6" stroke="#3f51b5" stroke-width="2"/>
+  <text x="900" y="1400" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#283593">5. 로봇 본체 IR 센서 회로도</text>
+  
+  <!-- IR Transmitter Array -->
+  <rect x="40" y="1425" width="500" height="220" rx="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="290" y="1450" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">장애물 감지 IR 송신부 (20채널)</text>
+  
+  <!-- 555 Timer circuit -->
+  <rect x="60" y="1470" width="150" height="100" rx="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1"/>
+  <text x="135" y="1490" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">38kHz 발진기</text>
+  <text x="135" y="1505" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">NE555 / MCU PWM</text>
+  
+  <!-- 555 pins -->
+  <text x="70" y="1530" font-family="monospace" font-size="8" fill="#333">VCC ─┐</text>
+  <text x="70" y="1545" font-family="monospace" font-size="8" fill="#333">GND ─┤ 555</text>
+  <text x="70" y="1560" font-family="monospace" font-size="8" fill="#333">OUT ─┘→ 38kHz</text>
+  
+  <!-- Demux / Driver IC -->
+  <rect x="230" y="1470" width="130" height="100" rx="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="1"/>
+  <text x="295" y="1490" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">채널 선택</text>
+  <text x="295" y="1508" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">74HC595 × 3</text>
+  <text x="295" y="1523" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">또는</text>
+  <text x="295" y="1538" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">ULN2803 × 3</text>
+  <text x="295" y="1560" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#888">(20ch LED 구동)</text>
+  
+  <!-- Connection -->
+  <line x1="210" y1="1520" x2="230" y2="1520" stroke="#ffc107" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- LED Array representation -->
+  <rect x="380" y="1470" width="140" height="100" rx="5" fill="#ffebee" stroke="#f44336" stroke-width="1"/>
+  <text x="450" y="1490" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">IR LED Array</text>
+  <g fill="#ff5722" stroke="#e64a19" stroke-width="0.5">
+    <circle cx="400" cy="1520" r="6"/>
+    <circle cx="420" cy="1520" r="6"/>
+    <circle cx="440" cy="1520" r="6"/>
+    <circle cx="460" cy="1520" r="6"/>
+    <circle cx="480" cy="1520" r="6"/>
+    <circle cx="400" cy="1545" r="6"/>
+    <circle cx="420" cy="1545" r="6"/>
+    <circle cx="440" cy="1545" r="6"/>
+    <circle cx="460" cy="1545" r="6"/>
+    <circle cx="480" cy="1545" r="6"/>
+  </g>
+  <text x="450" y="1565" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#666">×20 (범퍼 전면)</text>
+  
+  <!-- Connection -->
+  <line x1="360" y1="1520" x2="380" y2="1520" stroke="#4caf50" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- Scanning note -->
+  <rect x="60" y="1585" width="460" height="45" rx="3" fill="#e3f2fd" stroke="#1976d2" stroke-width="1"/>
+  <text x="290" y="1605" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1565c0">순차 스캔 방식</text>
+  <text x="70" y="1622" font-family="Arial, sans-serif" font-size="9" fill="#333">• 20개 LED를 순차적으로 ON (멀티플렉싱) → 개별 수신 신호로 방향 판단</text>
+  
+  <!-- IR Receiver Array -->
+  <rect x="560" y="1425" width="500" height="220" rx="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="810" y="1450" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">IR 수신부</text>
+  
+  <!-- Omni-directional receiver -->
+  <rect x="580" y="1470" width="150" height="80" rx="5" fill="#e1f5fe" stroke="#03a9f4" stroke-width="1"/>
+  <text x="655" y="1490" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0277bd">Omni-RX (도킹)</text>
+  <circle cx="655" cy="1520" r="20" fill="#b3e5fc" stroke="#0288d1" stroke-width="1.5"/>
+  <text x="655" y="1525" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#01579b">360°</text>
+  <text x="655" y="1542" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#666">돔 형태 렌즈</text>
+  
+  <!-- Directional receivers -->
+  <rect x="750" y="1470" width="150" height="80" rx="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1"/>
+  <text x="825" y="1490" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#6a1b9a">Directional-RX</text>
+  
+  <!-- RX arrangement -->
+  <rect x="770" y="1505" width="25" height="15" rx="2" fill="#9c27b0"/>
+  <text x="782" y="1535" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#333">전면×2</text>
+  
+  <rect x="810" y="1505" width="15" height="15" rx="2" fill="#7b1fa2"/>
+  <text x="817" y="1535" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#333">±120°</text>
+  
+  <rect x="840" y="1505" width="15" height="15" rx="2" fill="#6a1b9a"/>
+  <text x="860" y="1515" font-family="Arial, sans-serif" font-size="7" fill="#333">후면</text>
+  
+  <!-- Obstacle detection receiver -->
+  <rect x="920" y="1470" width="120" height="80" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+  <text x="980" y="1490" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#e65100">장애물 RX</text>
+  <text x="980" y="1510" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#333">TSOP38238</text>
+  <text x="980" y="1528" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#333">또는 동등품</text>
+  <text x="980" y="1545" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#666">38kHz 전용</text>
+  
+  <!-- MCU interface -->
+  <rect x="580" y="1560" width="460" height="75" rx="3" fill="#fafafa" stroke="#9e9e9e" stroke-width="1"/>
+  <text x="810" y="1580" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">MCU 인터페이스</text>
+  <text x="590" y="1600" font-family="monospace" font-size="9" fill="#333">• Omni-RX → ADC (신호 강도) + GPIO (인터럽트)</text>
+  <text x="590" y="1615" font-family="monospace" font-size="9" fill="#333">• Dir-RX   → GPIO × 6 (개별 채널 감지)</text>
+  <text x="590" y="1630" font-family="monospace" font-size="9" fill="#333">• Obst-RX  → GPIO × N (순차 스캔 결과)</text>
+  
+  <!-- Combined Schematic -->
+  <rect x="1080" y="1425" width="680" height="430" rx="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="1420" y="1450" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">통합 블록 다이어그램</text>
+  
+  <!-- MCU Block -->
+  <rect x="1300" y="1480" width="150" height="120" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="1375" y="1510" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#e65100">Main MCU</text>
+  <text x="1375" y="1530" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#333">STM32F103</text>
+  <text x="1375" y="1550" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">ARM Cortex-M3</text>
+  <text x="1375" y="1570" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#888">72MHz</text>
+  
+  <!-- IR TX Block -->
+  <rect x="1100" y="1480" width="120" height="60" rx="5" fill="#ffebee" stroke="#f44336" stroke-width="1.5"/>
+  <text x="1160" y="1505" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#c62828">IR TX (20ch)</text>
+  <text x="1160" y="1525" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#333">장애물 감지</text>
+  
+  <line x1="1220" y1="1510" x2="1300" y2="1510" stroke="#f44336" stroke-width="1.5" marker-end="url(#arrowhead-red)"/>
+  <text x="1260" y="1500" font-family="Arial, sans-serif" font-size="8" fill="#333">PWM/EN</text>
+  
+  <!-- Dock IR RX Block -->
+  <rect x="1100" y="1560" width="120" height="60" rx="5" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="1160" y="1585" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1565c0">Dock RX (6ch)</text>
+  <text x="1160" y="1605" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#333">도킹 네비</text>
+  
+  <line x1="1220" y1="1590" x2="1300" y2="1560" stroke="#1976d2" stroke-width="1.5" marker-end="url(#arrowhead-blue)"/>
+  <text x="1250" y="1565" font-family="Arial, sans-serif" font-size="8" fill="#333">GPIO/ADC</text>
+  
+  <!-- Obstacle RX Block -->
+  <rect x="1530" y="1480" width="120" height="60" rx="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="1590" y="1505" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#f57c00">Obstacle RX</text>
+  <text x="1590" y="1525" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#333">반사 감지</text>
+  
+  <line x1="1450" y1="1510" x2="1530" y2="1510" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="1490" y="1500" font-family="Arial, sans-serif" font-size="8" fill="#333">GPIO</text>
+  
+  <!-- Motor Driver -->
+  <rect x="1530" y="1560" width="120" height="60" rx="5" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="1590" y="1585" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#2e7d32">Motor Driver</text>
+  <text x="1590" y="1605" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#333">L/R Wheel</text>
+  
+  <line x1="1450" y1="1570" x2="1530" y2="1590" stroke="#4caf50" stroke-width="1.5" marker-end="url(#arrowhead-green)"/>
+  <text x="1495" y="1570" font-family="Arial, sans-serif" font-size="8" fill="#333">PWM</text>
+  
+  <!-- Motors -->
+  <circle cx="1700" cy="1510" r="25" fill="none" stroke="#333" stroke-width="1.5"/>
+  <text x="1700" y="1515" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#333">M1</text>
+  <line x1="1650" y1="1510" x2="1675" y2="1510" stroke="#333" stroke-width="1.5"/>
+  
+  <circle cx="1700" cy="1590" r="25" fill="none" stroke="#333" stroke-width="1.5"/>
+  <text x="1700" y="1595" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#333">M2</text>
+  <line x1="1650" y1="1590" x2="1675" y2="1590" stroke="#333" stroke-width="1.5"/>
+  
+  <!-- Power -->
+  <rect x="1300" y="1620" width="150" height="50" rx="5" fill="#fce4ec" stroke="#c2185b" stroke-width="1.5"/>
+  <text x="1375" y="1645" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#880e4f">Power Management</text>
+  <text x="1375" y="1663" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#333">Battery + BMS</text>
+  
+  <!-- Algorithm flow -->
+  <rect x="1100" y="1700" width="620" height="140" rx="5" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1"/>
+  <text x="1410" y="1720" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">센서 융합 알고리즘</text>
+  
+  <text x="1120" y="1745" font-family="Arial, sans-serif" font-size="10" fill="#333">1. 장애물 감지: IR TX/RX 반사 신호 → 거리 계산 → 회피 명령</text>
+  <text x="1120" y="1765" font-family="Arial, sans-serif" font-size="10" fill="#333">2. 도킹 탐색: Omni-RX로 Force Field 감지 → 방향 전환</text>
+  <text x="1120" y="1785" font-family="Arial, sans-serif" font-size="10" fill="#333">3. 도킹 접근: Front L/R 빔 감지 → Overlap Zone 진입</text>
+  <text x="1120" y="1805" font-family="Arial, sans-serif" font-size="10" fill="#333">4. 정밀 도킹: Center 빔 + 전면 RX×2 신호 강도 균등화 → 직진 도킹</text>
+  <text x="1120" y="1825" font-family="Arial, sans-serif" font-size="10" fill="#333">5. 충전 확인: 충전 단자 전압 감지 → 모터 정지 → 충전 시작</text>
+  
+  <!-- ==================== SECTION 6: BOM ==================== -->
+  <rect x="20" y="1885" width="1760" height="250" rx="10" fill="#eceff1" stroke="#607d8b" stroke-width="2"/>
+  <text x="900" y="1915" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#37474f">6. 주요 부품 목록 (BOM)</text>
+  
+  <!-- Station BOM -->
+  <rect x="40" y="1935" width="550" height="180" rx="5" fill="white" stroke="#78909c" stroke-width="1"/>
+  <text x="315" y="1960" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#37474f">충전 스테이션</text>
+  
+  <text x="60" y="1985" font-family="monospace" font-size="10" fill="#333">U1  : 7805 (5V LDO Regulator)</text>
+  <text x="60" y="2002" font-family="monospace" font-size="10" fill="#333">U3  : S033 PHVG 825Y (IR Controller/Timer)</text>
+  <text x="60" y="2019" font-family="monospace" font-size="10" fill="#333">Q1-Q15: HY3D (N-ch MOSFET, IR LED Driver)</text>
+  <text x="60" y="2036" font-family="monospace" font-size="10" fill="#333">D1  : SS24 (2A Schottky Diode)</text>
+  <text x="60" y="2053" font-family="monospace" font-size="10" fill="#333">D2  : MCC ME (Rectifier Diode)</text>
+  <text x="60" y="2070" font-family="monospace" font-size="10" fill="#333">C1  : 100µF 35V (Electrolytic Cap)</text>
+  <text x="60" y="2087" font-family="monospace" font-size="10" fill="#333">LED1-5: Status Indicator (Blue/Green)</text>
+  <text x="60" y="2104" font-family="monospace" font-size="10" fill="#333">IR LED: 940nm SMD × 5 (Docking Beacon)</text>
+  
+  <!-- Robot BOM -->
+  <rect x="610" y="1935" width="550" height="180" rx="5" fill="white" stroke="#78909c" stroke-width="1"/>
+  <text x="885" y="1960" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#37474f">로봇 본체</text>
+  
+  <text x="630" y="1985" font-family="monospace" font-size="10" fill="#333">MCU : STM32F103C8T6 (Main Controller)</text>
+  <text x="630" y="2002" font-family="monospace" font-size="10" fill="#333">IR TX: 940nm SMD LED × 20 (Obstacle Det.)</text>
+  <text x="630" y="2019" font-family="monospace" font-size="10" fill="#333">IR RX: TSOP38238 또는 VS1838B × N</text>
+  <text x="630" y="2036" font-family="monospace" font-size="10" fill="#333">Omni-RX: Dome type IR Receiver × 1</text>
+  <text x="630" y="2053" font-family="monospace" font-size="10" fill="#333">Dir-RX: 지향성 IR Receiver × 6</text>
+  <text x="630" y="2070" font-family="monospace" font-size="10" fill="#333">Driver: 74HC595 × 3 또는 ULN2803 × 3</text>
+  <text x="630" y="2087" font-family="monospace" font-size="10" fill="#333">NE555: 38kHz Oscillator (옵션)</text>
+  <text x="630" y="2104" font-family="monospace" font-size="10" fill="#333">Motor: L298N H-Bridge Driver</text>
+  
+  <!-- Common specs -->
+  <rect x="1180" y="1935" width="580" height="180" rx="5" fill="white" stroke="#78909c" stroke-width="1"/>
+  <text x="1470" y="1960" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#37474f">공통 사양/참고</text>
+  
+  <text x="1200" y="1985" font-family="Arial, sans-serif" font-size="10" fill="#333">• IR 캐리어 주파수: 38kHz (±1kHz)</text>
+  <text x="1200" y="2002" font-family="Arial, sans-serif" font-size="10" fill="#333">• IR 파장: 940nm (근적외선)</text>
+  <text x="1200" y="2019" font-family="Arial, sans-serif" font-size="10" fill="#333">• 도킹 빔 코딩: 채널별 고유 패턴 (Burst Encoding)</text>
+  <text x="1200" y="2036" font-family="Arial, sans-serif" font-size="10" fill="#333">• 장애물 감지 범위: 2cm ~ 40cm (조절 가능)</text>
+  <text x="1200" y="2053" font-family="Arial, sans-serif" font-size="10" fill="#333">• 참고 특허: US8380350B2 (iRobot Navigation)</text>
+  <text x="1200" y="2070" font-family="Arial, sans-serif" font-size="10" fill="#333">• 참고 특허: US20120323365A1 (Docking Process)</text>
+  <text x="1200" y="2087" font-family="Arial, sans-serif" font-size="10" fill="#333">• 빔 필드 각도: 45°~90° (Front L/R Overlap)</text>
+  <text x="1200" y="2104" font-family="Arial, sans-serif" font-size="10" fill="#333">• Force Field: 청소 중 스테이션 회피용 신호</text>
+  
+  <!-- ==================== SECTION 7: SUMMARY ==================== -->
+  <rect x="20" y="2150" width="1760" height="230" rx="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+  <text x="900" y="2180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2e7d32">7. 나무님 관찰 내용 검증 및 분석 결론</text>
+  
+  <rect x="40" y="2200" width="850" height="160" rx="5" fill="white" stroke="#81c784" stroke-width="1"/>
+  <text x="465" y="2225" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2e7d32">✓ 검증 결과</text>
+  
+  <text x="60" y="2250" font-family="Arial, sans-serif" font-size="11" fill="#333">■ 충전 스테이션 상단 Blue LED: 상태 표시용 (정확함)</text>
+  <text x="60" y="2270" font-family="Arial, sans-serif" font-size="11" fill="#333">■ 상단 평면 투명 LED: Omni-directional Force Field 송출용 (청소 중 회피 신호)</text>
+  <text x="60" y="2290" font-family="Arial, sans-serif" font-size="11" fill="#333">■ 하단 5개 IR LED (30°/정면): 도킹 유도 빔 (Far L/R + Front L/R + Center)</text>
+  <text x="60" y="2310" font-family="Arial, sans-serif" font-size="11" fill="#333">■ 본체 범퍼 20개 IR TX: 장애물 감지용 반사형 센서 (38kHz 변조)</text>
+  <text x="60" y="2330" font-family="Arial, sans-serif" font-size="11" fill="#333">■ 본체 전면 IR RX ×2: 정밀 도킹 정렬용 (Center 빔 수신)</text>
+  <text x="60" y="2350" font-family="Arial, sans-serif" font-size="11" fill="#333">■ 본체 ±120° IR RX (전면/후면): 광역 도킹 신호 탐지 + Virtual Wall 감지</text>
+  
+  <rect x="910" y="2200" width="850" height="160" rx="5" fill="white" stroke="#81c784" stroke-width="1"/>
+  <text x="1335" y="2225" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2e7d32">⚡ 핵심 설계 포인트</text>
+  
+  <text x="930" y="2250" font-family="Arial, sans-serif" font-size="11" fill="#333">1. 도킹 빔은 Overlapping Field 방식으로 로봇이 중심선을 찾을 수 있도록 설계</text>
+  <text x="930" y="2270" font-family="Arial, sans-serif" font-size="11" fill="#333">2. 각 채널별 코딩된 신호로 빔 구분 (동일 주파수, 다른 패턴)</text>
+  <text x="930" y="2290" font-family="Arial, sans-serif" font-size="11" fill="#333">3. 장애물 감지는 순차 스캔 방식으로 20채널 멀티플렉싱</text>
+  <text x="930" y="2310" font-family="Arial, sans-serif" font-size="11" fill="#333">4. IR 수신기는 38kHz 대역통과 필터 + AGC로 잡음 제거</text>
+  <text x="930" y="2330" font-family="Arial, sans-serif" font-size="11" fill="#333">5. TX-RX 간 차폐 필수 (직접 결합으로 인한 오감지 방지)</text>
+  <text x="930" y="2350" font-family="Arial, sans-serif" font-size="11" fill="#333">6. 후면 RX는 역방향 도킹 지원 및 Virtual Wall 감지에 활용</text>
+  
+  <!-- Footer -->
+  <text x="900" y="2390" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">© 2025 Robot Vacuum IR Navigation System Analysis | Based on iRobot Patents &amp; Technical References</text>
+</svg>
