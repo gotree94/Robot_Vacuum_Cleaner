@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기어드 모터 설계 계산기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #00d4ff;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .tab {
+            padding: 12px 24px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #a0a0a0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .tab.active {
+            background: rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .card-title {
+            color: #00d4ff;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+        .input-group {
+            margin-bottom: 14px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #a0a0a0;
+            font-size: 0.85rem;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .preset-container {
+            margin-bottom: 16px;
+        }
+        .preset-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a0a0a0;
+            font-size: 0.85rem;
+        }
+        .preset-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .preset-btn {
+            padding: 6px 12px;
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            border-radius: 6px;
+            background: transparent;
+            color: #00d4ff;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+        }
+        .preset-btn.active {
+            background: rgba(0, 212, 255, 0.3);
+        }
+        .result-section {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        .result-section h4 {
+            color: #00d4ff;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .result-label {
+            color: #a0a0a0;
+        }
+        .result-value {
+            color: #00ff88;
+            font-weight: bold;
+        }
+        .result-value.warning {
+            color: #ff6b6b;
+        }
+        .gear-stage {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+        .gear-stage-title {
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 16px;
+            font-size: 0.9rem;
+        }
+        .status-success {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        .status-fail {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+        .chart-container {
+            margin-top: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .chart-container h4 {
+            color: #00d4ff;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+        canvas {
+            width: 100% !important;
+            height: 200px !important;
+        }
+        .gear-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 16px;
+            flex-wrap: wrap;
+        }
+        .gear {
+            border: 3px solid #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 0.7rem;
+            min-width: 30px;
+            min-height: 30px;
+        }
+        .shaft {
+            width: 20px;
+            height: 4px;
+            background: #666;
+        }
+        .theory-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .theory-section h3 {
+            color: #00d4ff;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .theory-section p {
+            line-height: 1.8;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        .formula {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 12px 0;
+            border-left: 3px solid #00d4ff;
+            font-size: 0.9rem;
+        }
+        .theory-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        .theory-table th {
+            padding: 10px;
+            text-align: left;
+            color: #00d4ff;
+            border-bottom: 2px solid #00d4ff;
+        }
+        .theory-table td {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ 기어드 모터 설계 계산기</h1>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('calculator')">설계 계산</button>
+            <button class="tab" onclick="showTab('theory')">이론 설명</button>
+        </div>
+
+        <!-- 계산기 탭 -->
+        <div id="calculator-tab">
+            <div class="grid">
+                <!-- 모터 사양 입력 -->
+                <div class="card">
+                    <h2 class="card-title">🔌 DC 모터 사양</h2>
+                    
+                    <div class="preset-container">
+                        <label>프리셋 선택:</label>
+                        <div class="preset-buttons">
+                            <button class="preset-btn active" onclick="applyPreset('FA-130')">FA-130</button>
+                            <button class="preset-btn" onclick="applyPreset('RE-260')">RE-260</button>
+                            <button class="preset-btn" onclick="applyPreset('RS-385')">RS-385</button>
+                            <button class="preset-btn" onclick="applyPreset('RS-540')">RS-540</button>
+                            <button class="preset-btn" onclick="applyPreset('RS-775')">RS-775</button>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>모터 이름</label>
+                        <input type="text" id="motorName" value="FA-130 (3V)" oninput="calculate()">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>정격 전압 (V)</label>
+                            <input type="number" id="voltage" step="0.1" value="3.0" oninput="calculate()">
+                        </div>
+                        <div class="input-group">
+                            <label>무부하 회전수 (RPM)</label>
+                            <input type="number" id="rpmNoLoad" value="9600" oninput="calculate()">
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>무부하 전류 (A)</label>
+                            <input type="number" id="currentNoLoad" step="0.01" value="0.15" oninput="calculate()">
+                        </div>
+                        <div class="input-group">
+                            <label>정지(스톨) 전류 (A)</label>
+                            <input type="number" id="currentStall" step="0.1" value="2.2" oninput="calculate()">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>정지 토크 (mNm)</label>
+                        <input type="number" id="torqueStall" step="0.1" value="11.8" oninput="calculate()">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>직경 (mm)</label>
+                            <input type="number" id="diameter" step="0.1" value="20.4" oninput="calculate()">
+                        </div>
+                        <div class="input-group">
+                            <label>길이 (mm)</label>
+                            <input type="number" id="length" step="0.1" value="25.1" oninput="calculate()">
+                        </div>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>계산된 모터 상수</h4>
+                        <div class="result-item">
+                            <span class="result-label">역기전력 상수 Ke</span>
+                            <span class="result-value" id="Ke">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">토크 상수 Kt</span>
+                            <span class="result-value" id="Kt">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">전기자 저항 Ra</span>
+                            <span class="result-value" id="Ra">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">최대 출력</span>
+                            <span class="result-value" id="powerMax">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 목표 사양 -->
+                <div class="card">
+                    <h2 class="card-title">🎯 목표 사양</h2>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>목표 출력 회전수 (RPM)</label>
+                            <input type="number" id="targetRpm" value="100" oninput="calculate()">
+                        </div>
+                        <div class="input-group">
+                            <label>목표 출력 토크 (mNm)</label>
+                            <input type="number" id="targetTorque" value="500" oninput="calculate()">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>기어 종류</label>
+                        <select id="gearType" onchange="calculate()">
+                            <option value="spur">평기어 (Spur) - 효율 98%, 최대비 6:1</option>
+                            <option value="helical">헬리컬 (Helical) - 효율 97%, 최대비 8:1</option>
+                            <option value="planetary">유성기어 (Planetary) - 효율 97%, 최대비 10:1</option>
+                            <option value="worm">웜기어 (Worm) - 효율 75%, 최대비 60:1</option>
+                            <option value="bevel">베벨 (Bevel) - 효율 96%, 최대비 5:1</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>모터 효율 (%)</label>
+                        <input type="number" id="motorEfficiency" min="50" max="100" value="85" oninput="calculate()">
+                    </div>
+
+                    <div class="result-section" style="background: rgba(0, 212, 255, 0.1);">
+                        <h4>목표 출력</h4>
+                        <div class="result-item">
+                            <span class="result-label">필요 출력</span>
+                            <span class="result-value" id="targetPower">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">필요 기어비</span>
+                            <span class="result-value" id="requiredRatio">-</span>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h4>토크-속도 특성</h4>
+                        <canvas id="chartCanvas"></canvas>
+                        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px; font-size: 0.8rem;">
+                            <span style="color: #00d4ff;">● 회전수 (RPM)</span>
+                            <span style="color: #00ff88;">● 출력 (W)</span>
+                            <span style="color: #ff6b6b;">│ 동작점</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 기어 설계 결과 -->
+                <div class="card">
+                    <h2 class="card-title">⚙️ 기어 트레인 설계</h2>
+                    
+                    <div id="gearError" class="hidden" style="color: #ff6b6b; padding: 20px; text-align: center;">
+                    </div>
+                    
+                    <div id="gearResults">
+                        <div class="result-item">
+                            <span class="result-label">기어 종류</span>
+                            <span class="result-value" id="gearTypeName">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">기어 단수</span>
+                            <span class="result-value" id="numStages">-</span>
+                        </div>
+
+                        <div class="gear-visual" id="gearVisual">
+                        </div>
+
+                        <div id="stagesContainer">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 성능 분석 -->
+                <div class="card">
+                    <h2 class="card-title">📊 성능 분석</h2>
+
+                    <div id="performanceResults">
+                        <div class="result-section">
+                            <h4>기어 시스템</h4>
+                            <div class="result-item">
+                                <span class="result-label">총 기어비</span>
+                                <span class="result-value" id="totalRatio">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">총 기어 효율</span>
+                                <span class="result-value" id="totalGearEff">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">시스템 효율</span>
+                                <span class="result-value" id="systemEff">-</span>
+                            </div>
+                        </div>
+
+                        <div class="result-section">
+                            <h4>모터 동작점</h4>
+                            <div class="result-item">
+                                <span class="result-label">필요 모터 토크</span>
+                                <span class="result-value" id="reqMotorTorque">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">모터 회전수</span>
+                                <span class="result-value" id="motorRpm">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">모터 전류</span>
+                                <span class="result-value" id="motorCurrent">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">토크 마진</span>
+                                <span class="result-value" id="torqueMargin">-</span>
+                            </div>
+                        </div>
+
+                        <div class="result-section">
+                            <h4>출력 성능</h4>
+                            <div class="result-item">
+                                <span class="result-label">출력 회전수</span>
+                                <span class="result-value" id="outputRpm">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">출력 토크</span>
+                                <span class="result-value" id="outputTorque">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">출력 파워</span>
+                                <span class="result-value" id="outputPower">-</span>
+                            </div>
+                        </div>
+
+                        <div id="statusBadge" class="status-badge status-success">
+                            ✅ 설계 가능
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 이론 탭 -->
+        <div id="theory-tab" class="hidden">
+            <div class="card">
+                <h2 class="card-title">📚 기어드 모터 설계 이론</h2>
+
+                <div class="theory-section">
+                    <h3>1. DC 모터 기본 특성</h3>
+                    <p>DC 모터는 전기 에너지를 기계적 회전 에너지로 변환합니다. 모터의 특성은 몇 가지 핵심 상수로 결정됩니다.</p>
+                    
+                    <div class="formula">
+                        <strong>역기전력 (Back-EMF):</strong> E = Ke × ω
+                    </div>
+                    <p>모터가 회전하면 역방향 전압이 발생합니다. Ke는 역기전력 상수 [V/(rad/s)]입니다.</p>
+
+                    <div class="formula">
+                        <strong>토크 생성:</strong> T = Kt × I
+                    </div>
+                    <p>전류에 비례하여 토크가 발생합니다. Kt는 토크 상수 [Nm/A]입니다. 이상적으로 Ke = Kt (SI 단위계).</p>
+
+                    <div class="formula">
+                        <strong>토크-속도 관계:</strong> ω = ω_no_load × (1 - T/T_stall)
+                    </div>
+                    <p>DC 모터는 선형적인 토크-속도 특성을 가집니다. 토크가 증가하면 속도가 감소합니다.</p>
+                    
+                    <p><strong>최대 효율점:</strong> 정지 토크의 약 50% 지점<br>
+                    <strong>최대 출력점:</strong> 정지 토크의 약 50% 지점 (속도도 50%)</p>
+                </div>
+
+                <div class="theory-section">
+                    <h3>2. 기어 감속 원리</h3>
+                    <p>기어는 속도와 토크를 변환하는 기계 요소입니다. 에너지는 보존되므로 속도가 감소하면 토크가 증가합니다.</p>
+
+                    <div class="formula">
+                        <strong>기어비:</strong> G = N_피동 / N_구동 = 피동기어 잇수 / 구동기어 잇수
+                    </div>
+
+                    <div class="formula">
+                        <strong>속도 변환:</strong> ω_out = ω_in / G
+                    </div>
+                    <p>G > 1이면 감속(속도 감소), G < 1이면 증속(속도 증가)</p>
+
+                    <div class="formula">
+                        <strong>토크 변환:</strong> T_out = T_in × G × η
+                    </div>
+                    <p>η는 기어 효율 (0 < η < 1). 감속 시 토크가 증가합니다 (힘 증폭).</p>
+                    
+                    <div class="formula">
+                        <strong>출력 보존:</strong> P_out = P_in × η<br>
+                        T_out × ω_out = (T_in × ω_in) × η
+                    </div>
+                </div>
+
+                <div class="theory-section">
+                    <h3>3. 다단 기어 시스템</h3>
+                    <p>큰 기어비가 필요한 경우 여러 단의 기어를 직렬 연결합니다.</p>
+
+                    <div class="formula">
+                        <strong>총 기어비:</strong> G_total = G1 × G2 × G3 × ...
+                    </div>
+                    <div class="formula">
+                        <strong>총 효율:</strong> η_total = η1 × η2 × η3 × ...
+                    </div>
+
+                    <p><strong>예시:</strong> 100:1 감속이 필요한 경우</p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>단일 단: 100:1 (비실용적, 기어가 너무 큼)</li>
+                        <li>3단: 4.64:1 × 4.64:1 × 4.64:1 ≈ 100:1</li>
+                    </ul>
+                </div>
+
+                <div class="theory-section">
+                    <h3>4. 기어 종류별 특성</h3>
+                    <table class="theory-table">
+                        <thead>
+                            <tr>
+                                <th>기어 종류</th>
+                                <th>효율</th>
+                                <th>최대 기어비</th>
+                                <th>특징</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>평기어 (Spur)</td>
+                                <td>~98%</td>
+                                <td>6:1</td>
+                                <td>단순, 저렴, 소음 있음</td>
+                            </tr>
+                            <tr>
+                                <td>헬리컬 (Helical)</td>
+                                <td>~97%</td>
+                                <td>8:1</td>
+                                <td>저소음, 축방향 하중 발생</td>
+                            </tr>
+                            <tr>
+                                <td>유성기어 (Planetary)</td>
+                                <td>~97%</td>
+                                <td>10:1</td>
+                                <td>컴팩트, 동축, 고토크</td>
+                            </tr>
+                            <tr>
+                                <td>웜기어 (Worm)</td>
+                                <td>~75%</td>
+                                <td>60:1</td>
+                                <td>자기잠금 가능, 큰 감속비</td>
+                            </tr>
+                            <tr>
+                                <td>베벨 (Bevel)</td>
+                                <td>~96%</td>
+                                <td>5:1</td>
+                                <td>축 방향 변경 가능</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="theory-section">
+                    <h3>5. 기어 치수 설계</h3>
+                    <div class="formula">
+                        <strong>피치원 직경:</strong> d = m × z (m: 모듈, z: 잇수)
+                    </div>
+                    <div class="formula">
+                        <strong>이끝원 직경:</strong> da = d + 2m
+                    </div>
+                    <div class="formula">
+                        <strong>이뿌리원 직경:</strong> df = d - 2.5m
+                    </div>
+                    <div class="formula">
+                        <strong>중심거리:</strong> a = m × (z1 + z2) / 2
+                    </div>
+                    <p>모듈(m)은 기어 크기의 기준이 되는 값으로, 표준화된 값(0.3, 0.5, 0.8, 1.0, 1.5, 2.0...)을 사용합니다.</p>
+                    <p>최소 잇수는 일반적으로 12~18치로, 언더컷을 방지합니다.</p>
+                </div>
+
+                <div class="theory-section">
+                    <h3>6. 설계 시 고려사항</h3>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>토크 마진:</strong> 정지 토크의 80% 이하에서 운전 권장</li>
+                        <li><strong>열 관리:</strong> 연속 운전 시 모터 발열 고려</li>
+                        <li><strong>백래시:</strong> 정밀 위치 제어 시 중요 (보통 0.1~0.3°)</li>
+                        <li><strong>관성 매칭:</strong> 부하 관성과 모터 관성의 최적 비율 (1:1 ~ 10:1)</li>
+                        <li><strong>공진 회피:</strong> 시스템 고유진동수를 피해 설계</li>
+                        <li><strong>윤활:</strong> 기어 수명과 효율에 큰 영향</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 모터 프리셋
+        const MOTOR_PRESETS = {
+            'FA-130': {
+                name: 'FA-130 (3V)',
+                voltage: 3.0,
+                currentNoLoad: 0.15,
+                currentStall: 2.2,
+                rpmNoLoad: 9600,
+                torqueStall: 11.8,
+                diameter: 20.4,
+                length: 25.1
+            },
+            'RE-260': {
+                name: 'RE-260 (3V)',
+                voltage: 3.0,
+                currentNoLoad: 0.12,
+                currentStall: 1.8,
+                rpmNoLoad: 8000,
+                torqueStall: 15.0,
+                diameter: 24.0,
+                length: 28.0
+            },
+            'RS-385': {
+                name: 'RS-385 (12V)',
+                voltage: 12.0,
+                currentNoLoad: 0.08,
+                currentStall: 3.8,
+                rpmNoLoad: 7400,
+                torqueStall: 98.0,
+                diameter: 28.0,
+                length: 38.0
+            },
+            'RS-540': {
+                name: 'RS-540 (12V)',
+                voltage: 12.0,
+                currentNoLoad: 0.45,
+                currentStall: 18.0,
+                rpmNoLoad: 19000,
+                torqueStall: 470.0,
+                diameter: 36.0,
+                length: 50.0
+            },
+            'RS-775': {
+                name: 'RS-775 (12V)',
+                voltage: 12.0,
+                currentNoLoad: 0.7,
+                currentStall: 40.0,
+                rpmNoLoad: 18500,
+                torqueStall: 1200.0,
+                diameter: 44.0,
+                length: 66.0
+            }
+        };
+
+        // 기어 설정
+        const GEAR_CONFIG = {
+            spur: { efficiency: 0.98, maxRatio: 6, name: '평기어 (Spur)' },
+            helical: { efficiency: 0.97, maxRatio: 8, name: '헬리컬 (Helical)' },
+            planetary: { efficiency: 0.97, maxRatio: 10, name: '유성기어 (Planetary)' },
+            worm: { efficiency: 0.75, maxRatio: 60, name: '웜기어 (Worm)' },
+            bevel: { efficiency: 0.96, maxRatio: 5, name: '베벨 (Bevel)' }
+        };
+
+        const STANDARD_MODULES = [0.3, 0.4, 0.5, 0.6, 0.8, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0];
+
+        // 탭 전환
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('calculator-tab').classList.toggle('hidden', tabName !== 'calculator');
+            document.getElementById('theory-tab').classList.toggle('hidden', tabName !== 'theory');
+        }
+
+        // 프리셋 적용
+        function applyPreset(presetName) {
+            const preset = MOTOR_PRESETS[presetName];
+            if (!preset) return;
+
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('motorName').value = preset.name;
+            document.getElementById('voltage').value = preset.voltage;
+            document.getElementById('currentNoLoad').value = preset.currentNoLoad;
+            document.getElementById('currentStall').value = preset.currentStall;
+            document.getElementById('rpmNoLoad').value = preset.rpmNoLoad;
+            document.getElementById('torqueStall').value = preset.torqueStall;
+            document.getElementById('diameter').value = preset.diameter;
+            document.getElementById('length').value = preset.length;
+
+            calculate();
+        }
+
+        // 값 가져오기
+        function getVal(id) {
+            return parseFloat(document.getElementById(id).value) || 0;
+        }
+
+        // 계산 함수
+        function calculate() {
+            // 모터 값
+            const voltage = getVal('voltage');
+            const currentNoLoad = getVal('currentNoLoad');
+            const currentStall = getVal('currentStall');
+            const rpmNoLoad = getVal('rpmNoLoad');
+            const torqueStall = getVal('torqueStall');
+            
+            // 목표 값
+            const targetRpm = getVal('targetRpm');
+            const targetTorque = getVal('targetTorque');
+            const gearType = document.getElementById('gearType').value;
+            const motorEfficiency = getVal('motorEfficiency') / 100;
+
+            // 모터 상수 계산
+            const omegaNoLoad = rpmNoLoad * 2 * Math.PI / 60;
+            const torqueStallNm = torqueStall / 1000;
+            const Ke = voltage / omegaNoLoad * 1000;
+            const Kt = torqueStallNm / currentStall * 1000;
+            const Ra = voltage / currentStall;
+            const powerMax = (torqueStallNm / 4) * (omegaNoLoad / 2);
+
+            document.getElementById('Ke').textContent = Ke.toFixed(3) + ' mV/(rad/s)';
+            document.getElementById('Kt').textContent = Kt.toFixed(3) + ' mNm/A';
+            document.getElementById('Ra').textContent = Ra.toFixed(2) + ' Ω';
+            document.getElementById('powerMax').textContent = powerMax.toFixed(3) + ' W';
+
+            // 목표 출력
+            const targetPower = (targetTorque / 1000) * (targetRpm * 2 * Math.PI / 60);
+            const requiredRatio = rpmNoLoad / targetRpm;
+
+            document.getElementById('targetPower').textContent = targetPower.toFixed(3) + ' W';
+            document.getElementById('requiredRatio').textContent = requiredRatio.toFixed(2) + ':1';
+
+            // 기어 설계
+            const gearConfig = GEAR_CONFIG[gearType];
+            
+            if (requiredRatio < 1) {
+                document.getElementById('gearError').classList.remove('hidden');
+                document.getElementById('gearError').textContent = '⚠️ 증속이 필요합니다. 더 느린 모터를 선택하세요.';
+                document.getElementById('gearResults').style.opacity = '0.3';
+                return;
+            }
+            
+            document.getElementById('gearError').classList.add('hidden');
+            document.getElementById('gearResults').style.opacity = '1';
+
+            // 단수 계산
+            let numStages = Math.max(1, Math.ceil(Math.log(requiredRatio) / Math.log(gearConfig.maxRatio)));
+            let ratioPerStage = Math.pow(requiredRatio, 1 / numStages);
+
+            while (ratioPerStage > gearConfig.maxRatio && numStages < 5) {
+                numStages++;
+                ratioPerStage = Math.pow(requiredRatio, 1 / numStages);
+            }
+
+            document.getElementById('gearTypeName').textContent = gearConfig.name;
+            document.getElementById('numStages').textContent = numStages + '단';
+
+            // 각 단 설계
+            const stages = [];
+            let stagesHtml = '';
+            let visualHtml = '<div class="gear" style="width:30px;height:30px;font-size:0.6rem;">M</div><div class="shaft"></div>';
+
+            for (let i = 0; i < numStages; i++) {
+                const teethDriving = 18;
+                const teethDriven = Math.round(teethDriving * ratioPerStage);
+                const actualRatio = teethDriven / teethDriving;
+                const moduleIndex = Math.min(2 + i, STANDARD_MODULES.length - 1);
+                const module = STANDARD_MODULES[moduleIndex];
+                const pcdDriving = module * teethDriving;
+                const pcdDriven = module * teethDriven;
+
+                stages.push({
+                    ratio: actualRatio,
+                    efficiency: gearConfig.efficiency,
+                    teethDriving,
+                    teethDriven,
+                    module,
+                    pcdDriving,
+                    pcdDriven
+                });
+
+                stagesHtml += `
+                    <div class="gear-stage">
+                        <div class="gear-stage-title">Stage ${i + 1}</div>
+                        <div class="result-item">
+                            <span class="result-label">기어비</span>
+                            <span class="result-value">${actualRatio.toFixed(2)}:1</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">잇수</span>
+                            <span class="result-value">${teethDriving}치 / ${teethDriven}치</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">모듈</span>
+                            <span class="result-value">${module} mm</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">PCD</span>
+                            <span class="result-value">${pcdDriving.toFixed(1)} / ${pcdDriven.toFixed(1)} mm</span>
+                        </div>
+                    </div>
+                `;
+
+                const size1 = Math.min(20 + pcdDriving * 0.8, 50);
+                const size2 = Math.min(20 + pcdDriven * 0.5, 70);
+                visualHtml += `
+                    <div class="gear" style="width:${size1}px;height:${size1}px;">${teethDriving}</div>
+                    <div class="gear" style="width:${size2}px;height:${size2}px;">${teethDriven}</div>
+                `;
+                if (i < numStages - 1) {
+                    visualHtml += '<div class="shaft"></div>';
+                }
+            }
+
+            document.getElementById('stagesContainer').innerHTML = stagesHtml;
+            document.getElementById('gearVisual').innerHTML = visualHtml;
+
+            // 성능 분석
+            const totalRatio = stages.reduce((acc, s) => acc * s.ratio, 1);
+            const totalGearEff = stages.reduce((acc, s) => acc * s.efficiency, 1);
+            const totalEff = totalGearEff * motorEfficiency;
+
+            const targetTorqueNm = targetTorque / 1000;
+            const reqMotorTorque = targetTorqueNm / (totalRatio * totalEff);
+            const torqueRatio = reqMotorTorque / torqueStallNm;
+            const motorRpm = rpmNoLoad * (1 - torqueRatio);
+            const motorCurrent = currentNoLoad + (currentStall - currentNoLoad) * torqueRatio;
+            const outputRpm = motorRpm / totalRatio;
+            const outputTorqueNm = reqMotorTorque * totalRatio * totalEff;
+            const outputPower = outputTorqueNm * (outputRpm * 2 * Math.PI / 60);
+            const torqueMargin = (torqueStallNm - reqMotorTorque) / torqueStallNm * 100;
+            const feasible = reqMotorTorque <= torqueStallNm * 0.8;
+
+            document.getElementById('totalRatio').textContent = totalRatio.toFixed(2) + ':1';
+            document.getElementById('totalGearEff').textContent = (totalGearEff * 100).toFixed(1) + '%';
+            document.getElementById('systemEff').textContent = (totalEff * 100).toFixed(1) + '%';
+
+            document.getElementById('reqMotorTorque').textContent = (reqMotorTorque * 1000).toFixed(2) + ' mNm';
+            document.getElementById('motorRpm').textContent = motorRpm.toFixed(0) + ' RPM';
+            document.getElementById('motorCurrent').textContent = motorCurrent.toFixed(3) + ' A';
+            
+            const marginEl = document.getElementById('torqueMargin');
+            marginEl.textContent = torqueMargin.toFixed(1) + '%';
+            marginEl.className = 'result-value' + (torqueMargin < 20 ? ' warning' : '');
+
+            document.getElementById('outputRpm').textContent = outputRpm.toFixed(1) + ' RPM';
+            document.getElementById('outputTorque').textContent = (outputTorqueNm * 1000).toFixed(2) + ' mNm';
+            document.getElementById('outputPower').textContent = outputPower.toFixed(3) + ' W';
+
+            const statusBadge = document.getElementById('statusBadge');
+            if (feasible) {
+                statusBadge.className = 'status-badge status-success';
+                statusBadge.textContent = '✅ 설계 가능 - 목표 성능 달성 가능';
+            } else {
+                statusBadge.className = 'status-badge status-fail';
+                statusBadge.textContent = '❌ 설계 불가 - 더 강력한 모터 필요';
+            }
+
+            // 그래프 그리기
+            drawChart(rpmNoLoad, torqueStall, reqMotorTorque * 1000);
+        }
+
+        // 그래프 그리기
+        function drawChart(rpmNoLoad, torqueStall, operatingTorque) {
+            const canvas = document.getElementById('chartCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // 캔버스 크기 설정
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width - 32;
+            canvas.height = 200;
+            
+            const w = canvas.width;
+            const h = canvas.height;
+            const padding = { top: 20, right: 60, bottom: 30, left: 50 };
+            const chartW = w - padding.left - padding.right;
+            const chartH = h - padding.top - padding.bottom;
+
+            // 배경
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, w, h);
+
+            // 그리드
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= 5; i++) {
+                const x = padding.left + (chartW / 5) * i;
+                const y = padding.top + (chartH / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(x, padding.top);
+                ctx.lineTo(x, h - padding.bottom);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(padding.left, y);
+                ctx.lineTo(w - padding.right, y);
+                ctx.stroke();
+            }
+
+            // 데이터 계산
+            const torqueStallNm = torqueStall / 1000;
+            let maxPower = 0;
+            const points = [];
+            for (let i = 0; i <= 100; i += 2) {
+                const torque = torqueStall * (i / 100);
+                const rpm = rpmNoLoad * (1 - i / 100);
+                const power = (torque / 1000) * (rpm * 2 * Math.PI / 60);
+                if (power > maxPower) maxPower = power;
+                points.push({ torque, rpm, power });
+            }
+
+            // 스케일
+            const xScale = (t) => padding.left + (t / torqueStall) * chartW;
+            const yScaleRpm = (r) => padding.top + (1 - r / rpmNoLoad) * chartH;
+            const yScalePower = (p) => padding.top + (1 - p / maxPower) * chartH;
+
+            // RPM 선 그리기
+            ctx.strokeStyle = '#00d4ff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            points.forEach((p, i) => {
+                const x = xScale(p.torque);
+                const y = yScaleRpm(p.rpm);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // 출력 선 그리기
+            ctx.strokeStyle = '#00ff88';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            points.forEach((p, i) => {
+                const x = xScale(p.torque);
+                const y = yScalePower(p.power);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // 동작점 표시
+            if (operatingTorque > 0 && operatingTorque <= torqueStall) {
+                const opX = xScale(operatingTorque);
+                ctx.strokeStyle = '#ff6b6b';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(opX, padding.top);
+                ctx.lineTo(opX, h - padding.bottom);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // 축 레이블
+            ctx.fillStyle = '#888';
+            ctx.font = '11px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('토크 (mNm)', w / 2, h - 5);
+            
+            ctx.fillStyle = '#00d4ff';
+            ctx.textAlign = 'right';
+            ctx.fillText('RPM', padding.left - 5, padding.top + 10);
+            
+            ctx.fillStyle = '#00ff88';
+            ctx.textAlign = 'left';
+            ctx.fillText('W', w - padding.right + 5, padding.top + 10);
+
+            // 축 값
+            ctx.fillStyle = '#666';
+            ctx.font = '10px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('0', padding.left, h - padding.bottom + 15);
+            ctx.fillText(torqueStall.toFixed(0), w - padding.right, h - padding.bottom + 15);
+            
+            ctx.textAlign = 'right';
+            ctx.fillText(rpmNoLoad.toFixed(0), padding.left - 5, padding.top + 4);
+            ctx.fillText('0', padding.left - 5, h - padding.bottom + 4);
+        }
+
+        // 초기 계산
+        window.onload = function() {
+            calculate();
+            window.addEventListener('resize', calculate);
+        };
+    </script>
+</body>
+</html>
