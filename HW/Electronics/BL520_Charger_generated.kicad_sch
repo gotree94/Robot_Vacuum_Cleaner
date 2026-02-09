@@ -1,0 +1,819 @@
+(kicad_sch
+	(version 20231120)
+	(generator "BL520_kicad_generator.py")
+	(generator_version "1.0")
+	(uuid "02c44811-ca1c-4ee7-8c9b-9f05f4bdf997")
+	(paper "A3")
+	(title_block
+		(title "BL520 Charger Board V1.0")
+		(date "2026-02-03")
+		(rev "1.2")
+		(company "Robot Vacuum Charging Station")
+		(comment 1 "Reverse Engineered Schematic")
+		(comment 2 "TR: SOT-89 (High Current) / SOT-23-3 (Signal)")
+		(comment 3 "LED5: Green 2-Color Milky")
+	)
+
+	(text "BL520 Charger Board V1.0\nRobot Vacuum Charging Station\nReverse Engineered\n\nTransistors:\n- Q1,3,5,7,9: SOT-89 (High Current)\n- Q2,4,6,8,10,11: SOT-23-3 (Signal)\n\nLED5: Green 2-Color, Milky Lens"
+		(exclude_from_sim no)
+		(at 25.4 20.32 0)
+		(effects (font (size 1.524 1.524)) (justify left))
+	)
+
+	(text "===== DC INPUT ====="
+		(exclude_from_sim no)
+		(at 25.4 40.64 0)
+		(effects (font (size 1.524 1.524)) (justify left))
+	)
+
+	(text "===== 5V REGULATOR ====="
+		(exclude_from_sim no)
+		(at 106.68 40.64 0)
+		(effects (font (size 1.524 1.524)) (justify left))
+	)
+
+	(text "===== IR TRANSCEIVER ====="
+		(exclude_from_sim no)
+		(at 50.8 78.74 0)
+		(effects (font (size 1.524 1.524)) (justify left))
+	)
+
+	(text "===== SOT-89 DRIVERS ====="
+		(exclude_from_sim no)
+		(at 50.8 101.6 0)
+		(effects (font (size 1.524 1.524)) (justify left))
+	)
+
+	(text "===== SOT-23 SIGNAL ====="
+		(exclude_from_sim no)
+		(at 50.8 121.92 0)
+		(effects (font (size 1.524 1.524)) (justify left))
+	)
+
+	(text "===== CONNECTORS ====="
+		(exclude_from_sim no)
+		(at 147.32 40.64 0)
+		(effects (font (size 1.524 1.524)) (justify left))
+	)
+
+	(symbol
+		(lib_id "Connector:Barrel_Jack")
+		(at 25.4 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b413bb3d-1795-435b-8cb5-050c1714067a")
+		(property "Reference" "DC1" (at 25.4 45.72 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "DC_JACK" (at 25.4 55.879999999999995 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Connector_BarrelJack:BarrelJack" (at 25.4 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 25.4 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "DC1") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 50.8 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a1758f3c-1073-4d3e-9a6e-39d8e91220d7")
+		(property "Reference" "D1" (at 50.8 43.18 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "SS34" (at 50.8 53.339999999999996 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Diode_SMD:D_SMA" (at 50.8 48.26 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 50.8 48.26 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "D1") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 50.8 53.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cc6d5474-3482-4dbb-8717-7047aa718d15")
+		(property "Reference" "D2" (at 50.8 48.260000000000005 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "SS34" (at 50.8 58.42 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Diode_SMD:D_SMA" (at 50.8 53.34 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 50.8 53.34 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "D2") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:L")
+		(at 68.58 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "914fb16d-994b-4ebd-81f0-9f849c7024b0")
+		(property "Reference" "L1" (at 68.58 43.18 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10uH" (at 68.58 53.339999999999996 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Inductor_SMD:L_1206_3216Metric" (at 68.58 48.26 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 68.58 48.26 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "L1") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:L")
+		(at 68.58 53.34 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "04c45e03-0746-489f-897b-8095d22d3bb8")
+		(property "Reference" "L2" (at 68.58 48.260000000000005 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10uH" (at 68.58 58.42 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Inductor_SMD:L_1206_3216Metric" (at 68.58 53.34 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 68.58 53.34 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "L2") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:L")
+		(at 25.4 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d286eabc-2b66-4a54-ab69-61898aedc79d")
+		(property "Reference" "L3" (at 25.4 63.5 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "CMC" (at 25.4 73.66 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Inductor_THT:L_Toroid_Horizontal" (at 25.4 68.58 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 25.4 68.58 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "L3") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 38.1 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "25276321-2f54-4fab-a780-15388a0cdee8")
+		(property "Reference" "R9" (at 38.1 63.5 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10K" (at 38.1 73.66 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric" (at 38.1 68.58 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 38.1 68.58 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "R9") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 45.72 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "32475182-7ec9-4290-bfb0-bebd3750e07f")
+		(property "Reference" "R10" (at 45.72 63.5 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10K" (at 45.72 73.66 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric" (at 45.72 68.58 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 45.72 68.58 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "R10") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:CP")
+		(at 86.36 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "73f46eec-13d6-42ad-be7e-273fc2f1b73b")
+		(property "Reference" "C2" (at 86.36 50.800000000000004 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "100uF/35V" (at 86.36 60.96 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm" (at 86.36 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 86.36 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "C2") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:CP")
+		(at 93.98 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a1192f9b-a501-43ea-b7a2-ee6086243a01")
+		(property "Reference" "C3" (at 93.98 50.800000000000004 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10uF/35V" (at 93.98 60.96 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" (at 93.98 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 93.98 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "C3") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:CP")
+		(at 101.6 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9ce004e3-d783-4f0e-bf99-6530f82d5e4a")
+		(property "Reference" "C5" (at 101.6 50.800000000000004 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "100uF/35V" (at 101.6 60.96 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm" (at 101.6 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 101.6 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "C5") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Regulator_Linear:AMS1117-5.0")
+		(at 121.92 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fc9523ba-a06b-43ae-8ff1-54144f4a6c00")
+		(property "Reference" "U1" (at 121.92 45.72 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "AMS1117-5.0" (at 121.92 55.879999999999995 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 121.92 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 121.92 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "U1") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:CP")
+		(at 109.22 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cbcf83e1-ab9b-4c92-85af-796d0d252f3d")
+		(property "Reference" "C4" (at 109.22 50.800000000000004 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10uF/16V" (at 109.22 60.96 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" (at 109.22 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 109.22 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "C4") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:CP")
+		(at 134.62 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1e1c0105-7c3c-4ce6-9dbe-d2864ce5cd39")
+		(property "Reference" "C6" (at 134.62 50.800000000000004 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10uF/16V" (at 134.62 60.96 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" (at 134.62 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 134.62 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "C6") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:C")
+		(at 142.24 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f41292c3-ce36-471e-9447-447f2cc63bce")
+		(property "Reference" "C7" (at 142.24 50.800000000000004 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "100nF" (at 142.24 60.96 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 142.24 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 142.24 55.88 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "C7") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:LED")
+		(at 50.8 88.9 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a1592e6a-782c-4199-bca1-749e87842d69")
+		(property "Reference" "LED1" (at 50.8 83.82000000000001 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "IR_RX" (at 50.8 93.98 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "LED_THT:LED_D5.0mm" (at 50.8 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 50.8 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "LED1") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:LED")
+		(at 63.5 88.9 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9f4bf39a-94e1-48c6-945f-81273ea2b94f")
+		(property "Reference" "LED2" (at 63.5 83.82000000000001 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "IR_TX_940nm" (at 63.5 93.98 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "LED_THT:LED_D5.0mm" (at 63.5 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 63.5 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "LED2") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:LED")
+		(at 76.2 88.9 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "be160daf-ca17-444f-a9d8-d814713733f8")
+		(property "Reference" "LED3" (at 76.2 83.82000000000001 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "IR_RX" (at 76.2 93.98 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "LED_THT:LED_D5.0mm" (at 76.2 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 76.2 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "LED3") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:LED")
+		(at 88.9 88.9 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b60a2495-2097-4b0c-ab05-96409f7ad2f3")
+		(property "Reference" "LED4" (at 88.9 83.82000000000001 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "IR_TX_940nm" (at 88.9 93.98 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "LED_THT:LED_D5.0mm" (at 88.9 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 88.9 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "LED4") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:LED_Dual_AACC")
+		(at 104.14 88.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "63eee791-0992-408a-8636-7cb60212c689")
+		(property "Reference" "LED5" (at 104.14 83.82000000000001 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "GREEN_2C_MILKY" (at 104.14 93.98 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "LED_THT:LED_D5.0mm-3" (at 104.14 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 104.14 88.9 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "LED5") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BCX56")
+		(at 50.8 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2f580b5a-c38a-49ec-a654-f96107611535")
+		(property "Reference" "Q1" (at 50.8 104.14 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT89" (at 50.8 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3" (at 50.8 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 50.8 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q1") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BCX56")
+		(at 63.5 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "eb01e5fe-0564-4d74-bf2f-e38596a86857")
+		(property "Reference" "Q3" (at 63.5 104.14 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT89" (at 63.5 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3" (at 63.5 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 63.5 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q3") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BCX56")
+		(at 76.2 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fe63306b-2bb8-4e31-ba85-9961cc5a27b3")
+		(property "Reference" "Q5" (at 76.2 104.14 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT89" (at 76.2 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3" (at 76.2 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 76.2 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q5") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BCX56")
+		(at 88.9 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ce26a0e9-f9f3-487b-87e6-bd463090b67e")
+		(property "Reference" "Q7" (at 88.9 104.14 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT89" (at 88.9 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3" (at 88.9 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 88.9 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q7") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BCX56")
+		(at 101.6 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9b5ae486-fb65-4284-b299-3004f4a9ba79")
+		(property "Reference" "Q9" (at 101.6 104.14 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT89" (at 101.6 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3" (at 101.6 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 101.6 109.22 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q9") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BC817")
+		(at 50.8 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "186af3a6-f313-46bc-8fc8-ad75d5d2d3a6")
+		(property "Reference" "Q2" (at 50.8 121.92 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT23" (at 50.8 132.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 50.8 127 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 50.8 127 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q2") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BC817")
+		(at 63.5 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "87d33da1-4941-4549-ba21-ae8f12ba8914")
+		(property "Reference" "Q4" (at 63.5 121.92 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT23" (at 63.5 132.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 63.5 127 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 63.5 127 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q4") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BC817")
+		(at 76.2 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e70522bc-2c4b-4540-a10d-b985d4a9e4db")
+		(property "Reference" "Q6" (at 76.2 121.92 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT23" (at 76.2 132.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 76.2 127 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 76.2 127 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q6") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BC817")
+		(at 88.9 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8a50ae21-1934-4413-a18f-e78d8037fe49")
+		(property "Reference" "Q8" (at 88.9 121.92 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT23" (at 88.9 132.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 88.9 127 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 88.9 127 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q8") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BC817")
+		(at 101.6 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6810aedf-bb85-4d2b-9809-c5d5d60641f4")
+		(property "Reference" "Q10" (at 101.6 121.92 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT23" (at 101.6 132.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 101.6 127 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 101.6 127 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q10") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Transistor_BJT:BC817")
+		(at 114.3 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7f6ec5c7-2d22-4281-af96-d6efe5ee9d18")
+		(property "Reference" "Q11" (at 114.3 121.92 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "NPN_SOT23" (at 114.3 132.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 114.3 127 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 114.3 127 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "Q11") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 50.8 119.38 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e1802a12-161f-43f4-82db-0bf2867c46ed")
+		(property "Reference" "R11" (at 50.8 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "1K" (at 50.8 124.46 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 50.8 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 50.8 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "R11") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 63.5 119.38 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "986abbfa-e630-40f5-a423-4a3a915013ad")
+		(property "Reference" "R12" (at 63.5 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "1K" (at 63.5 124.46 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 63.5 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 63.5 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "R12") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 76.2 119.38 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a27c0e40-745c-49c8-acfd-11b78a43a189")
+		(property "Reference" "R13" (at 76.2 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "1K" (at 76.2 124.46 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 76.2 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 76.2 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "R13") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 88.9 119.38 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5b104044-bbf7-4f69-ab83-41b5dec626a9")
+		(property "Reference" "R14" (at 88.9 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "1K" (at 88.9 124.46 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 88.9 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 88.9 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "R14") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 101.6 119.38 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5b9009e5-d8f1-4bc9-8cf4-bfb5219c7f71")
+		(property "Reference" "R15" (at 101.6 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "1K" (at 101.6 124.46 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 101.6 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 101.6 119.38 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "R15") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 152.4 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4e55ff02-5c0e-47fe-b511-b9bf55ff65aa")
+		(property "Reference" "J1" (at 152.4 45.72 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "FPC_3PIN" (at 152.4 55.879999999999995 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (at 152.4 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 152.4 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "J1") (unit 1))
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 165.1 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "552a2ce6-d0f8-4d0e-81af-57ab98ba410e")
+		(property "Reference" "CHARGE" (at 165.1 45.72 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "2PIN" (at 165.1 55.879999999999995 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 165.1 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(property "Datasheet" "" (at 165.1 50.8 0) (effects (font (size 1.27 1.27)) hide))
+		(instances
+			(project "BL520_Charger"
+				(path "/02c44811-ca1c-4ee7-8c9b-9f05f4bdf997" (reference "CHARGE") (unit 1))
+			)
+		)
+	)
+
+)

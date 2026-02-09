@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1200" width="1700" height="1200">
+  <defs>
+    <style>
+      .title { font: bold 22px sans-serif; fill: #1a237e; }
+      .section { font: bold 12px sans-serif; fill: #0d47a1; }
+      .comp { font: bold 10px monospace; fill: #333; }
+      .val { font: 9px sans-serif; fill: #555; }
+      .pkg { font: italic 8px sans-serif; fill: #888; }
+      .wire { stroke: #333; stroke-width: 1.5; fill: none; }
+      .pwr { stroke: #d32f2f; stroke-width: 2; fill: none; }
+      .gnd { stroke: #1b5e20; stroke-width: 2; fill: none; }
+      .note { font: 9px sans-serif; fill: #616161; }
+      .pin { font: 8px monospace; fill: #333; }
+    </style>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#fafafa"/>
+  
+  <!-- Title Block -->
+  <rect x="10" y="10" width="1680" height="55" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="5"/>
+  <text x="30" y="42" class="title">BL520 Charger Board V1.0 - Robot Vacuum Charging Station</text>
+  <text x="1400" y="35" class="val">Rev: 1.0</text>
+  <text x="1400" y="50" class="val">Date: 2019-03-16-J</text>
+  <text x="1550" y="42" class="val">Sheet 1/1</text>
+
+  <!-- ==================== SECTION 1: DC INPUT ==================== -->
+  <rect x="20" y="75" width="220" height="280" fill="#fff8e1" stroke="#ff8f00" stroke-width="1.5" rx="5"/>
+  <text x="30" y="95" class="section">1. DC INPUT &amp; PROTECTION</text>
+  
+  <!-- DC Jack Symbol -->
+  <rect x="40" y="115" width="55" height="65" fill="#fff" stroke="#333" stroke-width="1.5" rx="3"/>
+  <circle cx="67" cy="140" r="15" fill="none" stroke="#333" stroke-width="2"/>
+  <circle cx="67" cy="140" r="5" fill="#333"/>
+  <line x1="67" y1="155" x2="67" y2="170" stroke="#333" stroke-width="2"/>
+  <text x="52" y="195" class="comp">DC1</text>
+  <text x="40" y="210" class="val">DC JACK</text>
+  <text x="100" y="130" class="pin">1 VIN+</text>
+  <text x="100" y="165" class="pin">2 GND</text>
+  
+  <!-- D1 Schottky -->
+  <g transform="translate(140, 120)">
+    <line x1="0" y1="12" x2="10" y2="12" stroke="#333" stroke-width="1.5"/>
+    <polygon points="10,5 10,19 25,12" fill="#333"/>
+    <line x1="25" y1="5" x2="25" y2="19" stroke="#333" stroke-width="2"/>
+    <line x1="25" y1="12" x2="35" y2="12" stroke="#333" stroke-width="1.5"/>
+    <text x="8" y="0" class="comp">D1</text>
+    <text x="5" y="35" class="val">SS34</text>
+    <text x="3" y="45" class="pkg">3216</text>
+  </g>
+  
+  <!-- D2 Schottky -->
+  <g transform="translate(140, 165)">
+    <line x1="0" y1="12" x2="10" y2="12" stroke="#333" stroke-width="1.5"/>
+    <polygon points="10,5 10,19 25,12" fill="#333"/>
+    <line x1="25" y1="5" x2="25" y2="19" stroke="#333" stroke-width="2"/>
+    <line x1="25" y1="12" x2="35" y2="12" stroke="#333" stroke-width="1.5"/>
+    <text x="8" y="0" class="comp">D2</text>
+    <text x="5" y="35" class="val">SS34</text>
+  </g>
+  
+  <!-- L1 Inductor -->
+  <g transform="translate(185, 120)">
+    <path d="M0,12 Q7,2 14,12 Q21,22 28,12 Q35,2 42,12" stroke="#7b1fa2" stroke-width="2" fill="none"/>
+    <text x="12" y="0" class="comp">L1</text>
+    <text x="8" y="35" class="val">10µH</text>
+    <text x="8" y="45" class="pkg">3216</text>
+  </g>
+  
+  <!-- L2 Inductor -->
+  <g transform="translate(185, 165)">
+    <path d="M0,12 Q7,2 14,12 Q21,22 28,12 Q35,2 42,12" stroke="#7b1fa2" stroke-width="2" fill="none"/>
+    <text x="12" y="0" class="comp">L2</text>
+    <text x="8" y="35" class="val">10µH</text>
+  </g>
+  
+  <!-- L3 Toroidal CMC -->
+  <ellipse cx="80" cy="290" rx="30" ry="22" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+  <path d="M55,280 Q70,265 85,280 Q100,295 85,305" stroke="#7b1fa2" stroke-width="2.5" fill="none"/>
+  <path d="M105,280 Q90,265 75,280 Q60,295 75,305" stroke="#7b1fa2" stroke-width="2.5" fill="none"/>
+  <text x="65" y="295" class="comp">L3</text>
+  <text x="55" y="330" class="val">CMC Coil</text>
+  <text x="55" y="342" class="pkg">Toroidal</text>
+  
+  <!-- R9, R10 -->
+  <g transform="translate(150, 260)">
+    <rect x="0" y="0" width="35" height="12" fill="#efebe9" stroke="#5d4037" stroke-width="1" rx="2"/>
+    <text x="8" y="-5" class="comp">R9</text>
+    <text x="40" y="10" class="val">10K</text>
+  </g>
+  <g transform="translate(150, 290)">
+    <rect x="0" y="0" width="35" height="12" fill="#efebe9" stroke="#5d4037" stroke-width="1" rx="2"/>
+    <text x="7" y="-5" class="comp">R10</text>
+    <text x="40" y="10" class="val">10K</text>
+    <text x="40" y="22" class="pkg">3216</text>
+  </g>
+  
+  <!-- Wires in DC section -->
+  <line x1="95" y1="132" x2="140" y2="132" class="wire"/>
+  <line x1="95" y1="177" x2="140" y2="177" class="wire"/>
+  <line x1="175" y1="132" x2="185" y2="132" class="wire"/>
+  <line x1="175" y1="177" x2="185" y2="177" class="wire"/>
+
+  <!-- ==================== SECTION 2: FILTER CAPACITORS ==================== -->
+  <rect x="250" y="75" width="160" height="200" fill="#fff3e0" stroke="#e65100" stroke-width="1.5" rx="5"/>
+  <text x="260" y="95" class="section">2. INPUT FILTER</text>
+  
+  <!-- C2 Electrolytic -->
+  <g transform="translate(270, 120)">
+    <rect x="0" y="0" width="28" height="50" fill="#fff" stroke="#e65100" stroke-width="1.5" rx="2"/>
+    <line x1="5" y1="-8" x2="23" y2="-8" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="14" y1="-15" x2="14" y2="-3" stroke="#e65100" stroke-width="1.5"/>
+    <text x="5" y="30" class="comp">C2</text>
+    <text x="-5" y="65" class="val">100µF</text>
+    <text x="0" y="77" class="val">35V</text>
+  </g>
+  
+  <!-- C3 Electrolytic -->
+  <g transform="translate(320, 120)">
+    <rect x="0" y="0" width="28" height="50" fill="#fff" stroke="#e65100" stroke-width="1.5" rx="2"/>
+    <line x1="5" y1="-8" x2="23" y2="-8" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="14" y1="-15" x2="14" y2="-3" stroke="#e65100" stroke-width="1.5"/>
+    <text x="5" y="30" class="comp">C3</text>
+    <text x="-2" y="65" class="val">10µF</text>
+    <text x="0" y="77" class="val">35V</text>
+  </g>
+  
+  <!-- C5 Electrolytic -->
+  <g transform="translate(370, 120)">
+    <rect x="0" y="0" width="28" height="50" fill="#fff" stroke="#e65100" stroke-width="1.5" rx="2"/>
+    <line x1="5" y1="-8" x2="23" y2="-8" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="14" y1="-15" x2="14" y2="-3" stroke="#e65100" stroke-width="1.5"/>
+    <text x="5" y="30" class="comp">C5</text>
+    <text x="-5" y="65" class="val">100µF</text>
+    <text x="0" y="77" class="val">35V</text>
+  </g>
+  
+  <!-- Power rail line -->
+  <line x1="227" y1="132" x2="410" y2="132" class="pwr"/>
+  <line x1="284" y1="132" x2="284" y2="120" class="pwr"/>
+  <line x1="334" y1="132" x2="334" y2="120" class="pwr"/>
+  <line x1="384" y1="132" x2="384" y2="120" class="pwr"/>
+  
+  <!-- GND rail -->
+  <line x1="270" y1="220" x2="400" y2="220" class="gnd"/>
+  <text x="280" y="245" class="val">GND</text>
+
+  <!-- ==================== SECTION 3: VOLTAGE REGULATOR ==================== -->
+  <rect x="420" y="75" width="200" height="200" fill="#fffde7" stroke="#fbc02d" stroke-width="1.5" rx="5"/>
+  <text x="430" y="95" class="section">3. 5V REGULATOR</text>
+  
+  <!-- U1 AMS1117 -->
+  <rect x="470" y="120" width="90" height="55" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="495" y="142" class="comp">U1</text>
+  <text x="480" y="158" class="val">AMS1117-5.0</text>
+  <text x="495" y="172" class="pkg">SOT-223</text>
+  
+  <!-- U1 Pins -->
+  <text x="450" y="135" class="pin">VI</text>
+  <text x="565" y="135" class="pin">VO</text>
+  <text x="505" y="195" class="pin">GND</text>
+  <line x1="470" y1="135" x2="455" y2="135" class="wire"/>
+  <line x1="560" y1="135" x2="575" y2="135" class="wire"/>
+  <line x1="515" y1="175" x2="515" y2="190" class="wire"/>
+  
+  <!-- C4 Input Cap -->
+  <g transform="translate(435, 200)">
+    <rect x="0" y="0" width="22" height="40" fill="#fff" stroke="#e65100" stroke-width="1" rx="2"/>
+    <text x="3" y="25" class="comp">C4</text>
+    <text x="-8" y="55" class="val">10µF/16V</text>
+  </g>
+  
+  <!-- C6 Output Cap -->
+  <g transform="translate(560, 200)">
+    <rect x="0" y="0" width="22" height="40" fill="#fff" stroke="#e65100" stroke-width="1" rx="2"/>
+    <text x="3" y="25" class="comp">C6</text>
+    <text x="-8" y="55" class="val">10µF/16V</text>
+  </g>
+  
+  <!-- C7 Decoupling -->
+  <g transform="translate(595, 200)">
+    <rect x="0" y="0" width="18" height="30" fill="#fff" stroke="#1565c0" stroke-width="1" rx="1"/>
+    <text x="2" y="18" class="comp">C7</text>
+    <text x="-5" y="45" class="val">100nF</text>
+    <text x="-2" y="57" class="pkg">0805</text>
+  </g>
+  
+  <!-- +5V Output -->
+  <text x="580" y="115" class="section" fill="#d32f2f">+5V</text>
+  <line x1="575" y1="135" x2="620" y2="135" class="pwr"/>
+
+  <!-- ==================== SECTION 4: CONTROL IC ==================== -->
+  <rect x="630" y="75" width="140" height="200" fill="#e8eaf6" stroke="#3f51b5" stroke-width="1.5" rx="5"/>
+  <text x="640" y="95" class="section">4. CONTROLLER</text>
+  
+  <!-- IC1 -->
+  <rect x="660" y="120" width="80" height="70" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="685" y="145" class="comp">IC1</text>
+  <text x="670" y="165" class="val">Controller</text>
+  <text x="680" y="182" class="pkg">SOIC-8</text>
+  
+  <!-- IC1 Pins -->
+  <text x="645" y="135" class="pin">VCC</text>
+  <text x="645" y="175" class="pin">GND</text>
+  <text x="745" y="135" class="pin">OUT</text>
+  <text x="745" y="155" class="pin">TX</text>
+  <text x="745" y="175" class="pin">RX</text>
+
+  <!-- ==================== SECTION 5: IR TRANSCEIVER ==================== -->
+  <rect x="780" y="75" width="450" height="320" fill="#e8f5e9" stroke="#388e3c" stroke-width="1.5" rx="5"/>
+  <text x="790" y="95" class="section">5. IR TRANSCEIVER</text>
+  <text x="790" y="112" class="note">LED1,3 = IR Receive (Photodiode) | LED2,4 = IR Transmit (940nm)</text>
+  
+  <!-- LED1 IR RX -->
+  <g transform="translate(810, 130)">
+    <polygon points="15,0 0,25 30,25" fill="#81c784" stroke="#2e7d32" stroke-width="1.5"/>
+    <line x1="15" y1="25" x2="15" y2="40" stroke="#333" stroke-width="2"/>
+    <path d="M35,5 L25,15 M40,10 L30,20" stroke="#2e7d32" stroke-width="1.5"/>
+    <text x="3" y="55" class="comp">LED1</text>
+    <text x="0" y="68" class="val">IR RX</text>
+    <text x="0" y="80" class="pkg">5mm THT</text>
+  </g>
+  
+  <!-- LED2 IR TX -->
+  <g transform="translate(890, 130)">
+    <polygon points="15,0 0,25 30,25" fill="#ef9a9a" stroke="#c62828" stroke-width="1.5"/>
+    <line x1="15" y1="25" x2="15" y2="40" stroke="#333" stroke-width="2"/>
+    <path d="M-5,5 L5,15 M-10,10 L0,20" stroke="#c62828" stroke-width="1.5"/>
+    <text x="3" y="55" class="comp">LED2</text>
+    <text x="0" y="68" class="val">IR TX</text>
+    <text x="-3" y="80" class="pkg">940nm</text>
+  </g>
+  
+  <!-- LED3 IR RX -->
+  <g transform="translate(970, 130)">
+    <polygon points="15,0 0,25 30,25" fill="#81c784" stroke="#2e7d32" stroke-width="1.5"/>
+    <line x1="15" y1="25" x2="15" y2="40" stroke="#333" stroke-width="2"/>
+    <path d="M35,5 L25,15 M40,10 L30,20" stroke="#2e7d32" stroke-width="1.5"/>
+    <text x="3" y="55" class="comp">LED3</text>
+    <text x="0" y="68" class="val">IR RX</text>
+  </g>
+  
+  <!-- LED4 IR TX -->
+  <g transform="translate(1050, 130)">
+    <polygon points="15,0 0,25 30,25" fill="#ef9a9a" stroke="#c62828" stroke-width="1.5"/>
+    <line x1="15" y1="25" x2="15" y2="40" stroke="#333" stroke-width="2"/>
+    <path d="M-5,5 L5,15 M-10,10 L0,20" stroke="#c62828" stroke-width="1.5"/>
+    <text x="3" y="55" class="comp">LED4</text>
+    <text x="0" y="68" class="val">IR TX</text>
+  </g>
+  
+  <!-- Large Package Transistors SOT-89 -->
+  <text x="790" y="235" class="section">Driver Transistors (SOT-89) - High Current for IR LED:</text>
+  
+  <!-- Q1 SOT-89 -->
+  <g transform="translate(810, 255)">
+    <rect x="0" y="0" width="35" height="25" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5" rx="2"/>
+    <rect x="5" y="25" width="25" height="8" fill="#3f51b5"/> <!-- Heat tab -->
+    <text x="8" y="17" class="comp">Q1</text>
+    <text x="2" y="48" class="val">NPN</text>
+    <text x="0" y="60" class="pkg">SOT-89</text>
+  </g>
+  
+  <!-- Q3 SOT-89 -->
+  <g transform="translate(870, 255)">
+    <rect x="0" y="0" width="35" height="25" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5" rx="2"/>
+    <rect x="5" y="25" width="25" height="8" fill="#3f51b5"/>
+    <text x="8" y="17" class="comp">Q3</text>
+    <text x="2" y="48" class="val">NPN</text>
+  </g>
+  
+  <!-- Q5 SOT-89 -->
+  <g transform="translate(930, 255)">
+    <rect x="0" y="0" width="35" height="25" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5" rx="2"/>
+    <rect x="5" y="25" width="25" height="8" fill="#3f51b5"/>
+    <text x="8" y="17" class="comp">Q5</text>
+    <text x="2" y="48" class="val">NPN</text>
+  </g>
+  
+  <!-- Q7 SOT-89 -->
+  <g transform="translate(990, 255)">
+    <rect x="0" y="0" width="35" height="25" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5" rx="2"/>
+    <rect x="5" y="25" width="25" height="8" fill="#3f51b5"/>
+    <text x="8" y="17" class="comp">Q7</text>
+    <text x="2" y="48" class="val">NPN</text>
+  </g>
+  
+  <!-- Q9 SOT-89 -->
+  <g transform="translate(1050, 255)">
+    <rect x="0" y="0" width="35" height="25" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5" rx="2"/>
+    <rect x="5" y="25" width="25" height="8" fill="#3f51b5"/>
+    <text x="8" y="17" class="comp">Q9</text>
+    <text x="2" y="48" class="val">NPN</text>
+  </g>
+  
+  <text x="1100" y="275" class="note">High current</text>
+  <text x="1100" y="288" class="note">~500mA peak</text>
+  
+  <!-- Small Package Transistors SOT-23-3 -->
+  <text x="790" y="335" class="section">Signal Transistors (SOT-23-3) - Control Logic:</text>
+  
+  <!-- Q2 SOT-23 -->
+  <g transform="translate(810, 350)">
+    <rect x="0" y="0" width="25" height="18" fill="#d1c4e9" stroke="#7b1fa2" stroke-width="1" rx="2"/>
+    <text x="5" y="13" class="comp">Q2</text>
+    <text x="-2" y="32" class="pkg">SOT-23</text>
+  </g>
+  
+  <!-- Q4 SOT-23 -->
+  <g transform="translate(860, 350)">
+    <rect x="0" y="0" width="25" height="18" fill="#d1c4e9" stroke="#7b1fa2" stroke-width="1" rx="2"/>
+    <text x="5" y="13" class="comp">Q4</text>
+  </g>
+  
+  <!-- Q6 SOT-23 -->
+  <g transform="translate(910, 350)">
+    <rect x="0" y="0" width="25" height="18" fill="#d1c4e9" stroke="#7b1fa2" stroke-width="1" rx="2"/>
+    <text x="5" y="13" class="comp">Q6</text>
+  </g>
+  
+  <!-- Q8 SOT-23 -->
+  <g transform="translate(960, 350)">
+    <rect x="0" y="0" width="25" height="18" fill="#d1c4e9" stroke="#7b1fa2" stroke-width="1" rx="2"/>
+    <text x="5" y="13" class="comp">Q8</text>
+  </g>
+  
+  <!-- Q10 SOT-23 -->
+  <g transform="translate(1010, 350)">
+    <rect x="0" y="0" width="25" height="18" fill="#d1c4e9" stroke="#7b1fa2" stroke-width="1" rx="2"/>
+    <text x="2" y="13" class="comp">Q10</text>
+  </g>
+  
+  <!-- Q11 SOT-23 -->
+  <g transform="translate(1060, 350)">
+    <rect x="0" y="0" width="25" height="18" fill="#d1c4e9" stroke="#7b1fa2" stroke-width="1" rx="2"/>
+    <text x="2" y="13" class="comp">Q11</text>
+  </g>
+  
+  <text x="1100" y="365" class="note">NPN</text>
+  
+  <!-- Base Resistors R11-R15 -->
+  <text x="790" y="400" class="section">Base Resistors (0603):</text>
+  
+  <g transform="translate(810, 408)">
+    <rect x="0" y="0" width="28" height="10" fill="#efebe9" stroke="#5d4037" stroke-width="1" rx="1"/>
+    <text x="3" y="-3" class="comp">R11</text>
+    <text x="32" y="8" class="val">1K</text>
+  </g>
+  <g transform="translate(880, 408)">
+    <rect x="0" y="0" width="28" height="10" fill="#efebe9" stroke="#5d4037" stroke-width="1" rx="1"/>
+    <text x="3" y="-3" class="comp">R12</text>
+  </g>
+  <g transform="translate(950, 408)">
+    <rect x="0" y="0" width="28" height="10" fill="#efebe9" stroke="#5d4037" stroke-width="1" rx="1"/>
+    <text x="3" y="-3" class="comp">R13</text>
+  </g>
+  <g transform="translate(1020, 408)">
+    <rect x="0" y="0" width="28" height="10" fill="#efebe9" stroke="#5d4037" stroke-width="1" rx="1"/>
+    <text x="3" y="-3" class="comp">R14</text>
+  </g>
+  <g transform="translate(1090, 408)">
+    <rect x="0" y="0" width="28" height="10" fill="#efebe9" stroke="#5d4037" stroke-width="1" rx="1"/>
+    <text x="3" y="-3" class="comp">R15</text>
+  </g>
+  <text x="1130" y="417" class="pkg">0603</text>
+
+  <!-- ==================== SECTION 6: STATUS LED ==================== -->
+  <rect x="1240" y="75" width="130" height="160" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="5"/>
+  <text x="1250" y="95" class="section">6. STATUS LED</text>
+  
+  <!-- LED5 Green 2-Color Milky -->
+  <rect x="1265" y="115" width="70" height="45" fill="#f1f8e9" stroke="#333" stroke-width="1.5" rx="4"/>
+  <circle cx="1285" cy="137" r="12" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+  <circle cx="1315" cy="137" r="12" fill="#a5d6a7" stroke="#388e3c" stroke-width="2"/>
+  <text x="1285" y="178" class="comp">LED5</text>
+  <text x="1258" y="195" class="val">Green 2-Color</text>
+  <text x="1265" y="210" class="pkg">5mm 3-pin Milky</text>
+  <text x="1265" y="222" class="note">(우유빛 몰드)</text>
+
+  <!-- ==================== SECTION 7: OUTPUT CONNECTORS ==================== -->
+  <rect x="1380" y="75" width="200" height="220" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5" rx="5"/>
+  <text x="1390" y="95" class="section">7. OUTPUT CONNECTORS</text>
+  
+  <!-- J1 FPC Connector -->
+  <rect x="1400" y="115" width="75" height="90" fill="#fff" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="1420" y="135" class="comp">J1</text>
+  <circle cx="1418" cy="155" r="6" fill="#f44336"/>
+  <text x="1430" y="158" class="pin">1 Red (VCC)</text>
+  <circle cx="1418" cy="175" r="6" fill="#212121"/>
+  <text x="1430" y="178" class="pin">2 Blk (GND)</text>
+  <circle cx="1418" cy="195" r="6" fill="#2196f3"/>
+  <text x="1430" y="198" class="pin">3 Blue (Sig)</text>
+  <text x="1405" y="225" class="val">FPC 3-pin</text>
+  <text x="1405" y="238" class="pkg">2.54mm pitch</text>
+  
+  <!-- CHARGE Connector -->
+  <rect x="1500" y="115" width="60" height="70" fill="#fff" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="1510" y="135" class="comp">CHARGE</text>
+  <circle cx="1518" cy="155" r="6" fill="#f44336"/>
+  <text x="1530" y="158" class="pin">1 V+</text>
+  <circle cx="1518" cy="175" r="6" fill="#212121"/>
+  <text x="1530" y="178" class="pin">2 GND</text>
+  <text x="1500" y="205" class="val">2-pin</text>
+  <text x="1495" y="218" class="pkg">2.54mm pitch</text>
+
+  <!-- ==================== SECTION 8: FLEXIBLE PCB ==================== -->
+  <rect x="20" y="410" width="600" height="150" fill="#fff3e0" stroke="#ff6f00" stroke-width="1.5" rx="5"/>
+  <text x="30" y="430" class="section">8. FLEXIBLE PCB (XDG)</text>
+  <text x="30" y="448" class="note">BL500 Anticol sion Bar 2017-07-01 | Connected via J1</text>
+  
+  <!-- FPC representation -->
+  <path d="M50,480 Q150,460 260,480 Q370,500 480,480 Q560,465 600,475" 
+        stroke="#ff9800" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- SMD LEDs -->
+  <g transform="translate(80, 495)">
+    <rect x="0" y="0" width="35" height="22" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5" rx="2"/>
+    <text x="5" y="15" class="comp">D2</text>
+  </g>
+  <g transform="translate(170, 495)">
+    <rect x="0" y="0" width="35" height="22" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5" rx="2"/>
+    <text x="5" y="15" class="comp">D3</text>
+  </g>
+  <g transform="translate(260, 495)">
+    <rect x="0" y="0" width="35" height="22" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5" rx="2"/>
+    <text x="5" y="15" class="comp">D4</text>
+  </g>
+  <g transform="translate(350, 495)">
+    <rect x="0" y="0" width="35" height="22" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5" rx="2"/>
+    <text x="5" y="15" class="comp">D5</text>
+  </g>
+  <g transform="translate(440, 495)">
+    <rect x="0" y="0" width="35" height="22" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5" rx="2"/>
+    <text x="5" y="15" class="comp">D6</text>
+  </g>
+  
+  <text x="500" y="510" class="val">SMD LED x5</text>
+  <text x="500" y="525" class="pkg">0805 Package</text>
+  <text x="30" y="545" class="note">Wire: Red=VCC, Black=GND, Blue=Signal</text>
+
+  <!-- ==================== SECTION 9: BLOCK DIAGRAM ==================== -->
+  <rect x="630" y="410" width="580" height="150" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1.5" rx="5"/>
+  <text x="640" y="430" class="section">9. SYSTEM BLOCK DIAGRAM</text>
+  
+  <!-- Blocks -->
+  <rect x="660" y="450" width="60" height="35" fill="#ffcdd2" stroke="#c62828" rx="3"/>
+  <text x="672" y="472" class="comp">DC IN</text>
+  
+  <line x1="720" y1="467" x2="750" y2="467" class="wire" marker-end="url(#arr)"/>
+  
+  <rect x="750" y="450" width="70" height="35" fill="#f3e5f5" stroke="#7b1fa2" rx="3"/>
+  <text x="762" y="465" class="comp">EMI</text>
+  <text x="760" y="478" class="comp">Filter</text>
+  
+  <line x1="820" y1="467" x2="850" y2="467" class="wire" marker-end="url(#arr)"/>
+  
+  <rect x="850" y="450" width="60" height="35" fill="#fffde7" stroke="#f9a825" rx="3"/>
+  <text x="862" y="465" class="comp">5V</text>
+  <text x="858" y="478" class="comp">LDO</text>
+  
+  <line x1="910" y1="467" x2="940" y2="467" class="wire" marker-end="url(#arr)"/>
+  
+  <rect x="940" y="450" width="70" height="35" fill="#e8eaf6" stroke="#3f51b5" rx="3"/>
+  <text x="958" y="472" class="comp">IC1</text>
+  
+  <line x1="1010" y1="455" x2="1050" y2="455" class="wire" marker-end="url(#arr)"/>
+  <rect x="1050" y="442" width="50" height="26" fill="#ffcdd2" stroke="#c62828" rx="2"/>
+  <text x="1058" y="459" class="comp">IR TX</text>
+  
+  <line x1="1010" y1="475" x2="1050" y2="475" class="wire" marker-end="url(#arr)"/>
+  <rect x="1050" y="468" width="50" height="26" fill="#c8e6c9" stroke="#2e7d32" rx="2"/>
+  <text x="1058" y="485" class="comp">IR RX</text>
+  
+  <line x1="975" y1="485" x2="975" y2="520" class="wire" marker-end="url(#arr)"/>
+  <rect x="920" y="520" width="110" height="25" fill="#e3f2fd" stroke="#1976d2" rx="2"/>
+  <text x="932" y="537" class="comp">J1 | CHARGE | LED5</text>
+  
+  <rect x="1120" y="450" width="70" height="35" fill="#c5cae9" stroke="#3f51b5" rx="3"/>
+  <text x="1130" y="465" class="comp">Q1-Q11</text>
+  <text x="1130" y="478" class="val">Drivers</text>
+
+  <!-- ==================== BOM SUMMARY ==================== -->
+  <rect x="1220" y="410" width="250" height="150" fill="#e8f5e9" stroke="#43a047" stroke-width="1.5" rx="5"/>
+  <text x="1230" y="430" class="section">BOM SUMMARY (Total: ~35 parts)</text>
+  
+  <text x="1230" y="450" class="val">Connectors: 3 (DC1, J1, CHARGE)</text>
+  <text x="1230" y="465" class="val">Diodes: 2 (D1, D2)</text>
+  <text x="1230" y="480" class="val">Inductors: 3 (L1, L2, L3)</text>
+  <text x="1230" y="495" class="val">Capacitors: 6 (C2-C7)</text>
+  <text x="1230" y="510" class="val">ICs: 1 (U1)</text>
+  <text x="1230" y="525" class="val">LEDs: 5+5 (LED1-5 + FPC D2-D6)</text>
+  <text x="1230" y="540" class="val">  └ LED5: Green 2-Color (Milky)</text>
+  <text x="1230" y="540" class="val">Transistors: 11 (Q1-Q11)</text>
+  <text x="1230" y="555" class="val">Resistors: 7 (R9-R15)</text>
+
+  <!-- ==================== NOTES ==================== -->
+  <rect x="20" y="570" width="1450" height="130" fill="#fafafa" stroke="#bdbdbd" stroke-width="1" rx="5"/>
+  <text x="30" y="590" class="section">DESIGN NOTES</text>
+  
+  <text x="30" y="610" class="note">1. Power Input: 18-24V DC → D1/D2 reverse protection → L1/L2/L3 EMI filter → C2/C3/C5 bulk caps → U1 AMS1117-5.0 → +5V rail</text>
+  <text x="30" y="627" class="note">2. IR Transmitter: IC1 → R11-R15 (1K base resistors) → Q1/Q3/Q5/Q7/Q9 (SOT-89 high-current drivers) → LED2/LED4 (940nm IR LED)</text>
+  <text x="30" y="644" class="note">3. IR Receiver: LED1/LED3 (photodiode) → signal conditioning → IC1 for robot position detection</text>
+  <text x="30" y="661" class="note">4. SOT-89 Selection: Heat dissipation tab allows ~500mA continuous, suitable for pulsed IR LED drive at 38kHz modulation</text>
+  <text x="30" y="678" class="note">5. Flexible PCB: 5x SMD LEDs (D2-D6) on curved PCB strip for visual indication, connected via J1 (Red=VCC, Black=GND, Blue=Data)</text>
+  <text x="30" y="695" class="note">6. CHARGE Output: Direct charging voltage output to robot vacuum battery via 2-pin connector</text>
+
+  <!-- Footer -->
+  <rect x="1200" y="700" width="270" height="30" fill="#e3f2fd" stroke="#1976d2" rx="3"/>
+  <text x="1210" y="720" class="val">BL520 Charger Board V1.0 | 2019-03-16-J | FPC: BL500 2017-07-01</text>
+</svg>
